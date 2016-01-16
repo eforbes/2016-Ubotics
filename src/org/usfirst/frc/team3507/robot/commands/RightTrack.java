@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RightSpeed extends Command {
+public class RightTrack extends Command {
 
-    public RightSpeed() {
+    public RightTrack() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.DriveTrainRight);
