@@ -10,7 +10,7 @@ public class LeftTrack extends Command {
     public LeftTrack() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	//time out after 1 ms
+    	//time out after 10 ms
     }
 
     // Called just before this Command runs the first time
