@@ -20,12 +20,15 @@ public class LeftTrack extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(LeftJoystick()>0)
+    	if(LeftJoystick()>0){
     		//move the left track forwards
-    	if(LeftJoysticj()=0)
+    	}
+    	if(LeftJoysticj()=0){
     		//stop the left track
-    	if(LeftJoystick()<0)
+    	}
+    	if(LeftJoystick()<0){
     		//move the left track backwards
+    	}
     		
     }
 

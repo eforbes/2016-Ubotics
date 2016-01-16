@@ -21,7 +21,7 @@ public class DriveTrainLeft extends Subsystem {
     	//stops the left track, value is 0
     }
     public void backwards(){
-    	//moves the left track in reverse, accepts a value between 0 and -1
+    	//moves the left track backwards, accepts a value between 0 and -1
     }
 }
 
