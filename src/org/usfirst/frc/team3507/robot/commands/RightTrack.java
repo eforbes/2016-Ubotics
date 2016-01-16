@@ -12,7 +12,6 @@ public class RightTrack extends Command {
     public RightTrack() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.DriveTrainRight);
     }
 
     // Called just before this Command runs the first time

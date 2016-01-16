@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team3507.robot.commands.ExampleCommand;
+import org.usfirst.frc.team3507.robot.subsystems.DriveTrainLeft;
+import org.usfirst.frc.team3507.robot.subsystems.DriveTrainRight;
 import org.usfirst.frc.team3507.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
