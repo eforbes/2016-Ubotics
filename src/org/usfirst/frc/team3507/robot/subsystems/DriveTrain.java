@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
     
-    public static CANTalon master;
-    public static CANTalon slave1;
-    public static CANTalon slave2;
+    public CANTalon master;
+    public CANTalon slave1;
+    public CANTalon slave2;
     
     public DriveTrain(int x) {
     	if (x == 0) {
@@ -33,7 +33,7 @@ public class DriveTrain extends Subsystem {
     public void stop(){
     	master.set(0);
     }
-    public void backwards(double speed){
+    public void backward(double speed){
     	master.set(speed);
     }
 }

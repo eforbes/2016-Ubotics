@@ -20,19 +20,18 @@ public class LeftTrackAuto extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.oi.controller.getRawAxis(1) > 0){
-    		//move the left track forwards
+    	if(speed > 0){
+    		Robot.leftTrack.forward(speed);
     	}
-    	if(LeftJoystick=0){
-    		//stop the left track
+    	if(speed == 0){
+    		Robot.leftTrack.stop();;
     	}
-    	if(LeftJoystick<0){
-    		//move the left track backwards
+    	if(speed < 0){
+    		Robot.leftTrack.backward(speed);
     	}
     }
 
@@ -43,7 +42,7 @@ public class LeftTrackAuto extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	//stop the left track
+    	Robot.leftTrack.stop();
     }
 
     // Called when another command which requires one or more of the same
