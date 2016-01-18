@@ -2,6 +2,7 @@
 package org.usfirst.frc.team3507.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -32,6 +33,14 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
+    	DriveTrainLeft.leftSlave1.changeControlMode(TalonControlMode.Follower);
+    	DriveTrainLeft.leftSlave2.changeControlMode(TalonControlMode.Follower);
+    	DriveTrainLeft.leftSlave1.set(0);
+    	DriveTrainLeft.leftSlave2.set(0);
+    	DriveTrainRight.rightSlave1.changeControlMode(TalonControlMode.Follower);
+    	DriveTrainRight.rightSlave2.changeControlMode(TalonControlMode.Follower);
+    	DriveTrainRight.rightSlave1.set(0);
+    	DriveTrainRight.rightSlave2.set(0);
         chooser = new SendableChooser();
         //chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
