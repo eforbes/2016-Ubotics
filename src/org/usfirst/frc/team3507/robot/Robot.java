@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team3507.robot.subsystems.DriveTrainLeft;
-import org.usfirst.frc.team3507.robot.subsystems.DriveTrainRight;
+
+import org.usfirst.frc.team3507.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -20,8 +20,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	public static final DriveTrainRight rightTrack = new DriveTrainRight();
-	public static final DriveTrainLeft leftTrack = new DriveTrainLeft();
+	public static final DriveTrain leftTrack = new DriveTrain(0);
+	public static final DriveTrain rightTrack = new DriveTrain(1);
 	public static OI oi;
 
     Command autonomousCommand;
@@ -33,14 +33,14 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-    	DriveTrainLeft.leftSlave1.changeControlMode(TalonControlMode.Follower);
-    	DriveTrainLeft.leftSlave2.changeControlMode(TalonControlMode.Follower);
-    	DriveTrainLeft.leftSlave1.set(RobotMap.leftMaster);
-    	DriveTrainLeft.leftSlave2.set(RobotMap.leftMaster);
-    	DriveTrainRight.rightSlave1.changeControlMode(TalonControlMode.Follower);
-    	DriveTrainRight.rightSlave2.changeControlMode(TalonControlMode.Follower);
-    	DriveTrainRight.rightSlave1.set(RobotMap.rightMaster);
-    	DriveTrainRight.rightSlave2.set(RobotMap.rightMaster);
+    	leftTrack.slave1.changeControlMode(TalonControlMode.Follower);
+    	leftTrack.slave2.changeControlMode(TalonControlMode.Follower);
+    	rightTrack.slave1.changeControlMode(TalonControlMode.Follower);
+    	rightTrack.slave2.changeControlMode(TalonControlMode.Follower);
+    	leftTrack.slave1.set(RobotMap.leftMaster);
+    	leftTrack.slave2.set(RobotMap.leftMaster);
+    	rightTrack.slave1.set(RobotMap.rightMaster);
+    	rightTrack.slave2.set(RobotMap.rightMaster);
         chooser = new SendableChooser();
         //chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());

@@ -1,16 +1,21 @@
 package org.usfirst.frc.team3507.robot.commands;
 
+import org.usfirst.frc.team3507.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class LeftTrack extends Command {
+public class LeftTrackAuto extends Command {
+	
+	private double speed;
 
-    public LeftTrack() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	//time out after 10 ms
+    public LeftTrackAuto(int ms, double spd) {
+        super("LeftTrackAuto");
+        requires(Robot.leftTrack);
+    	setTimeout(ms);
+    	speed = spd;
     }
 
     // Called just before this Command runs the first time
@@ -20,7 +25,7 @@ public class LeftTrack extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	/*if(LeftJoystick>0){
+    	if(Robot.oi.controller.getRawAxis(1) > 0){
     		//move the left track forwards
     	}
     	if(LeftJoystick=0){
@@ -28,7 +33,7 @@ public class LeftTrack extends Command {
     	}
     	if(LeftJoystick<0){
     		//move the left track backwards
-    	}*/
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

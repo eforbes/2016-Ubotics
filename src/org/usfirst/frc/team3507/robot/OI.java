@@ -13,8 +13,8 @@ public class OI {
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button
     // number it is.
-    Joystick controller = new Joystick(RobotMap.controller);
-    Button A = new JoystickButton(controller, 0),
+    public Joystick controller = new Joystick(RobotMap.controller);
+    public Button A = new JoystickButton(controller, 0),
     		B = new JoystickButton(controller, 1),
     		X = new JoystickButton(controller, 2),
     		Y = new JoystickButton(controller, 3),
