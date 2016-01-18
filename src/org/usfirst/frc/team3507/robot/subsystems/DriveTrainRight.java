@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3507.robot.subsystems;
 
+import org.usfirst.frc.team3507.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -8,9 +10,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class DriveTrainRight extends Subsystem {
     
-	public static CANTalon rightMaster = new CANTalon(3);
-	public static CANTalon rightSlave1 = new CANTalon(4);
-	public static CANTalon rightSlave2 = new CANTalon(5);
+	public static CANTalon rightMaster = new CANTalon(RobotMap.rightMaster);
+	public static CANTalon rightSlave1 = new CANTalon(RobotMap.rightSlave1);
+	public static CANTalon rightSlave2 = new CANTalon(RobotMap.rightSlave2);
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

@@ -35,12 +35,12 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
     	DriveTrainLeft.leftSlave1.changeControlMode(TalonControlMode.Follower);
     	DriveTrainLeft.leftSlave2.changeControlMode(TalonControlMode.Follower);
-    	DriveTrainLeft.leftSlave1.set(0);
-    	DriveTrainLeft.leftSlave2.set(0);
+    	DriveTrainLeft.leftSlave1.set(RobotMap.leftMaster);
+    	DriveTrainLeft.leftSlave2.set(RobotMap.leftMaster);
     	DriveTrainRight.rightSlave1.changeControlMode(TalonControlMode.Follower);
     	DriveTrainRight.rightSlave2.changeControlMode(TalonControlMode.Follower);
-    	DriveTrainRight.rightSlave1.set(0);
-    	DriveTrainRight.rightSlave2.set(0);
+    	DriveTrainRight.rightSlave1.set(RobotMap.rightMaster);
+    	DriveTrainRight.rightSlave2.set(RobotMap.rightMaster);
         chooser = new SendableChooser();
         //chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
