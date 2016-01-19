@@ -28,7 +28,7 @@ public class LeftTrackAuto extends Command {
     		Robot.leftTrack.forward(speed);
     	}
     	if(speed == 0){
-    		Robot.leftTrack.stop();;
+    		Robot.leftTrack.stop();
     	}
     	if(speed < 0){
     		Robot.leftTrack.backward(speed);
