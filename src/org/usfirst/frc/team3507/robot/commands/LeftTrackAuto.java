@@ -25,13 +25,13 @@ public class LeftTrackAuto extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(speed > 0){
-    		Robot.leftTrack.forward(speed);
+    		Robot.leftTrack.forward(speed, 0);
     	}
     	if(speed == 0){
     		Robot.leftTrack.stop();
     	}
     	if(speed < 0){
-    		Robot.leftTrack.backward(speed);
+    		Robot.leftTrack.backward(speed, 0);
     	}
     }
 
