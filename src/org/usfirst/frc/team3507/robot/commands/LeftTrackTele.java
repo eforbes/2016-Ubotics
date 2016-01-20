@@ -22,11 +22,11 @@ public class LeftTrackTele extends Command {
     	double jAxis = Robot.oi.controller.getRawAxis(1);
     	
     	if (jAxis > deadzone) {
-    		Robot.leftTrack.forward(jAxis);
+    		Robot.leftTrack.forward(jAxis, deadzone);
     	} else if (jAxis > -deadzone && jAxis < deadzone) {
     		Robot.leftTrack.stop();
     	} else if (jAxis < -deadzone) {
-    		Robot.leftTrack.backward(jAxis);
+    		Robot.leftTrack.backward(jAxis, deadzone);
     	}
     }
 

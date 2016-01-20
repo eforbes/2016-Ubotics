@@ -25,11 +25,11 @@ public class RightTrackTele extends Command {
     	double jAxis = Robot.oi.controller.getRawAxis(5);
     	
     	if (jAxis > deadzone) {
-    		Robot.rightTrack.forward(jAxis);
+    		Robot.rightTrack.forward(jAxis, deadzone);
     	} else if (jAxis > -deadzone && jAxis < deadzone) {
     		Robot.rightTrack.stop();
     	} else if (jAxis < -deadzone) {
-    		Robot.rightTrack.backward(jAxis);
+    		Robot.rightTrack.backward(jAxis, deadzone);
     	}
     }
 

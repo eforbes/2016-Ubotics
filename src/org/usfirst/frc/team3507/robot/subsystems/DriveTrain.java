@@ -27,14 +27,16 @@ public class DriveTrain extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
-    public void forward(double speed){
-    	master.set(speed);
+    public void forward(double speed, double deadzone){
+    	double speedScale = ((speed-(Math.abs(speed)/speed*deadzone))/(1-deadzone));
+    	master.set(speedScale);
     }
     public void stop(){
     	master.set(0);
     }
-    public void backward(double speed){
-    	master.set(speed);
+    public void backward(double speed, double deadzone){
+    	double speedScale = ((speed-(Math.abs(speed)/speed*deadzone))/(1-deadzone));
+    	master.set(speedScale);
     }
 }
 
