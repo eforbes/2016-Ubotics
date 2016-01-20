@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class RightTrackTele extends Command {
+	
 	double deadzone = 0.02;
 
     public RightTrackTele() {
@@ -23,11 +24,11 @@ public class RightTrackTele extends Command {
     protected void execute() {
     	double jAxis = Robot.oi.controller.getRawAxis(5);
     	
-    	if (jAxis > 0) {
+    	if (jAxis > deadzone) {
     		Robot.rightTrack.forward(jAxis);
-    	} else if (jAxis == 0) {
+    	} else if (jAxis > -deadzone && jAxis < deadzone) {
     		Robot.rightTrack.stop();
-    	} else if (jAxis < 0) {
+    	} else if (jAxis < -deadzone) {
     		Robot.rightTrack.backward(jAxis);
     	}
     }

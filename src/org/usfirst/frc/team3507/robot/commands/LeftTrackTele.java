@@ -5,6 +5,8 @@ import org.usfirst.frc.team3507.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class LeftTrackTele extends Command {
+	
+	double deadzone = 0.02;
 
     public LeftTrackTele() {
     	super("LeftTrackTele");
@@ -19,11 +21,11 @@ public class LeftTrackTele extends Command {
     protected void execute() {
     	double jAxis = Robot.oi.controller.getRawAxis(1);
     	
-    	if (jAxis > 0) {
+    	if (jAxis > deadzone) {
     		Robot.leftTrack.forward(jAxis);
-    	} else if (jAxis == 0) {
+    	} else if (jAxis > -deadzone && jAxis < deadzone) {
     		Robot.leftTrack.stop();
-    	} else if (jAxis < 0) {
+    	} else if (jAxis < -deadzone) {
     		Robot.leftTrack.backward(jAxis);
     	}
     }
