@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team3507.robot.commands.LeftTrackTele;
+import org.usfirst.frc.team3507.robot.commands.RightTrackTele;
 import org.usfirst.frc.team3507.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -27,6 +28,7 @@ public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
     Command leftTrackTele = new LeftTrackTele();
+    Command rightTrackTele = new RightTrackTele();
     SendableChooser chooser;
 
     /**
@@ -35,14 +37,6 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-    	leftTrack.slave1.changeControlMode(TalonControlMode.Follower);
-    	leftTrack.slave2.changeControlMode(TalonControlMode.Follower);
-    	rightTrack.slave1.changeControlMode(TalonControlMode.Follower);
-    	rightTrack.slave2.changeControlMode(TalonControlMode.Follower);
-    	leftTrack.slave1.set(RobotMap.leftMaster);
-    	leftTrack.slave2.set(RobotMap.leftMaster);
-    	rightTrack.slave1.set(RobotMap.rightMaster);
-    	rightTrack.slave2.set(RobotMap.rightMaster);
         chooser = new SendableChooser();
         //chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
@@ -110,6 +104,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         leftTrackTele.start();
+        rightTrackTele.start();
     }
     
     /**
