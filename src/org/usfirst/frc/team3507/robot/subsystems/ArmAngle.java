@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class ArmAngle extends Subsystem {
 
-	public CANTalon armMotor = new CANTalon(RobotMap.armMotor);
+	public CANTalon motor = new CANTalon(RobotMap.armMotor);
 	
 	public ArmAngle() {
 	}
@@ -19,7 +19,7 @@ public class ArmAngle extends Subsystem {
     }
     
     public void up(double speed) {
-    	armMotor.set(speed);
+    	motor.set(speed);
     }
     
     public void stop() {
@@ -27,7 +27,7 @@ public class ArmAngle extends Subsystem {
     }
     
     public void down(double speed) {
-    	armMotor.set(speed);
+    	motor.set(speed);
     }
 }
 
