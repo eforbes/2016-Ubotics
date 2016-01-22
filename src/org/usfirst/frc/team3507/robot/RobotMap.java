@@ -24,4 +24,6 @@ public class RobotMap {
 	public static int rightMaster = 3;
 	public static int rightSlave1 = 4;
 	public static int rightSlave2 = 5;
+
+	public static int armMotor = 6;
 }
