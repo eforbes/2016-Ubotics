@@ -27,7 +27,7 @@ public class ArmAngle extends Subsystem {
     }
     
     public void down(double speed) {
-    	
+    	armMotor.set(speed);
     }
 }
 
