@@ -1,15 +1,20 @@
 
 package org.usfirst.frc.team3507.robot;
 
+import org.usfirst.frc.team3507.robot.commands.ArmDown;
+import org.usfirst.frc.team3507.robot.commands.ArmStop;
+import org.usfirst.frc.team3507.robot.commands.ArmUp;
+import org.usfirst.frc.team3507.robot.commands.LeftTrackTele;
+import org.usfirst.frc.team3507.robot.commands.RightTrackTele;
+import org.usfirst.frc.team3507.robot.subsystems.ArmAngle;
+import org.usfirst.frc.team3507.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team3507.robot.subsystems.Flywheel;
+import org.usfirst.frc.team3507.robot.subsystems.Intake;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
-import org.usfirst.frc.team3507.robot.commands.LeftTrackTele;
-import org.usfirst.frc.team3507.robot.commands.RightTrackTele;
-import org.usfirst.frc.team3507.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -24,11 +29,18 @@ public class Robot extends IterativeRobot {
 
 	public static final DriveTrain leftTrack = new DriveTrain(0);
 	public static final DriveTrain rightTrack = new DriveTrain(1);
+	public static final ArmAngle armAngle = new ArmAngle();
+	public static final Flywheel flywheel = new Flywheel();
+	public static final Intake intake = new Intake();
+	
 	public static OI oi;
 
-    Command autonomousCommand;
     Command leftTrackTele = new LeftTrackTele();
     Command rightTrackTele = new RightTrackTele();
+    Command armUp = new ArmUp();
+    Command armStop = new ArmStop();
+    Command armDown = new ArmDown();
+    
     SendableChooser chooser;
 
     /**
@@ -66,21 +78,6 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
-        
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
-			break;
-		case "Default Auto":
-		default:
-			autonomousCommand = new ExampleCommand();
-			break;
-		} */
-    	
-    	// schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
     }
 
     /**
@@ -91,11 +88,6 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
     }
 
     /**
