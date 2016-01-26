@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3507.robot.subsystems;
 
-import org.usfirst.frc.team3507.robot.Robot;
 import org.usfirst.frc.team3507.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -18,18 +17,18 @@ public class DriveTrain extends Subsystem {
         	master = new CANTalon(RobotMap.leftMaster);
         	slave1 = new CANTalon(RobotMap.leftSlave1);
         	slave2 = new CANTalon(RobotMap.leftSlave2);
-        	Robot.leftTrack.slave1.changeControlMode(TalonControlMode.Follower);
-        	Robot.leftTrack.slave2.changeControlMode(TalonControlMode.Follower);
-        	Robot.leftTrack.slave1.set(RobotMap.leftMaster);
-        	Robot.leftTrack.slave2.set(RobotMap.leftMaster);
+        	slave1.changeControlMode(TalonControlMode.Follower);
+        	slave2.changeControlMode(TalonControlMode.Follower);
+        	slave1.set(RobotMap.leftMaster);
+        	slave2.set(RobotMap.leftMaster);
     	} else if (x == 1) {
         	master = new CANTalon(RobotMap.rightMaster);
         	slave1 = new CANTalon(RobotMap.rightSlave1);
         	slave2 = new CANTalon(RobotMap.rightSlave2);
-        	Robot.rightTrack.slave1.changeControlMode(TalonControlMode.Follower);
-        	Robot.rightTrack.slave2.changeControlMode(TalonControlMode.Follower);
-        	Robot.rightTrack.slave1.set(RobotMap.rightMaster);
-        	Robot.rightTrack.slave2.set(RobotMap.rightMaster);
+        	slave1.changeControlMode(TalonControlMode.Follower);
+        	slave2.changeControlMode(TalonControlMode.Follower);
+        	slave1.set(RobotMap.rightMaster);
+        	slave2.set(RobotMap.rightMaster);
     	}
     }
 

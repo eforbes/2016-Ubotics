@@ -3,6 +3,11 @@ package org.usfirst.frc.team3507.robot;
 import org.usfirst.frc.team3507.robot.commands.ArmDown;
 import org.usfirst.frc.team3507.robot.commands.ArmStop;
 import org.usfirst.frc.team3507.robot.commands.ArmUp;
+import org.usfirst.frc.team3507.robot.commands.FlywheelStart;
+import org.usfirst.frc.team3507.robot.commands.FlywheelStop;
+import org.usfirst.frc.team3507.robot.commands.IntakeIn;
+import org.usfirst.frc.team3507.robot.commands.IntakeOut;
+import org.usfirst.frc.team3507.robot.commands.IntakeStop;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -55,6 +60,14 @@ public class OI {
     	rightBump.whenReleased(new ArmStop());
     	leftBump.whenPressed(new ArmDown());
     	leftBump.whenReleased(new ArmStop());
+    	
+    	A.whenPressed(new IntakeIn());
+    	A.whenReleased(new IntakeStop());
+    	B.whenPressed(new IntakeOut());
+    	B.whenReleased(new IntakeStop());
+    	
+    	X.whenPressed(new FlywheelStart());
+    	X.whenReleased(new FlywheelStop());
     }
 }
 
