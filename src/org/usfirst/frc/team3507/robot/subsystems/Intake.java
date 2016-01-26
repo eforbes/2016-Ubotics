@@ -33,7 +33,7 @@ public class Intake extends Subsystem
     
     public void out(double speed)
     {
-    	motor.set(speed);
+    	motor.set(-speed);
     }
 }
 

@@ -32,7 +32,7 @@ public class Flywheel extends Subsystem
     
     public void out(double speed)
     {
-    	motor.set(speed);
+    	motor.set(-speed);
     }
     
     

@@ -15,7 +15,7 @@ public class LeftTrackAuto extends Command {
         super("LeftTrackAuto");
         requires(Robot.leftTrack);
     	setTimeout(ms);
-    	speed = spd;
+    	speed = -spd;
     }
 
     // Called just before this Command runs the first time

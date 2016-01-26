@@ -15,7 +15,7 @@ public class RightTrackAuto extends Command {
         super("RightTrackAuto");
         requires(Robot.rightTrack);
         setTimeout(ms);
-        speed = spd;
+        speed = -spd;
     }
 
     // Called just before this Command runs the first time
