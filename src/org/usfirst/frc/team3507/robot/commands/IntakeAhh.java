@@ -7,16 +7,19 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class FlywheelStop extends Command {
+public class IntakeAhh extends Command {
 
-    public FlywheelStop() {
+	private static double sped;
+	
+    public IntakeAhh(double spd) {
+    	sped = spd;
     }
 
     protected void initialize() {
     }
 
     protected void execute() {
-    	Robot.flywheel.out(1);
+    	Robot.intake.go(sped);
     }
 
     protected boolean isFinished() {
@@ -24,8 +27,10 @@ public class FlywheelStop extends Command {
     }
 
     protected void end() {
+    	Robot.intake.stop();
     }
 
     protected void interrupted() {
+    	end();
     }
 }

@@ -7,16 +7,19 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class IntakeOut extends Command {
-
-    public IntakeOut() {
+public class ArmAngle extends Command {
+	
+	private static double sped;
+	
+    public ArmAngle(double spd) {
+    	sped = spd;
     }
-
+    
     protected void initialize() {
     }
 
     protected void execute() {
-    	Robot.intake.out(0.75);
+    	Robot.arm.go(sped);
     }
 
     protected boolean isFinished() {
@@ -24,8 +27,10 @@ public class IntakeOut extends Command {
     }
 
     protected void end() {
+    	Robot.arm.stop();
     }
 
     protected void interrupted() {
+    	end();
     }
 }

@@ -3,49 +3,33 @@ package org.usfirst.frc.team3507.robot.subsystems;
 import org.usfirst.frc.team3507.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
     
-    public CANTalon master;
-    public CANTalon slave1;
-    public CANTalon slave2;
+    public CANTalon masterLeft = new CANTalon(RobotMap.leftMaster);
+    public CANTalon slave1Left = new CANTalon(RobotMap.leftSlave1);
+    public CANTalon slave2Left = new CANTalon(RobotMap.leftSlave2);
+    public CANTalon masterRight = new CANTalon(RobotMap.rightMaster);
+    public CANTalon slave1Right = new CANTalon(RobotMap.rightSlave1);
+    public CANTalon slave2Right = new CANTalon(RobotMap.rightSlave2);
     
-    public DriveTrain(int x) {
-    	if (x == 0) {
-        	master = new CANTalon(RobotMap.leftMaster);
-        	slave1 = new CANTalon(RobotMap.leftSlave1);
-        	slave2 = new CANTalon(RobotMap.leftSlave2);
-        	slave1.changeControlMode(TalonControlMode.Follower);
-        	slave2.changeControlMode(TalonControlMode.Follower);
-        	slave1.set(RobotMap.leftMaster);
-        	slave2.set(RobotMap.leftMaster);
-    	} else if (x == 1) {
-        	master = new CANTalon(RobotMap.rightMaster);
-        	slave1 = new CANTalon(RobotMap.rightSlave1);
-        	slave2 = new CANTalon(RobotMap.rightSlave2);
-        	slave1.changeControlMode(TalonControlMode.Follower);
-        	slave2.changeControlMode(TalonControlMode.Follower);
-        	slave1.set(RobotMap.rightMaster);
-        	slave2.set(RobotMap.rightMaster);
-    	}
+    public DriveTrain() {
     }
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     }
-    public void forward(double speed, double deadzone){
-    	double speedScale = ((speed-(Math.abs(speed)/speed*deadzone))/(1-deadzone));
-    	master.set(speedScale);
+    
+    public void go(double left, double right, double deadzone){
+    	double scaleLeft = ((left-(Math.abs(left)/left*deadzone))/(1-deadzone));
+    	double scaleRight = ((right-(Math.abs(right)/right*deadzone))/(1-deadzone));
+    	masterLeft.set(scaleLeft);
+    	masterRight.set(scaleRight);
     }
+    
     public void stop(){
-    	master.set(0);
-    }
-    public void backward(double speed, double deadzone){
-    	double speedScale = ((speed-(Math.abs(speed)/speed*deadzone))/(1-deadzone));
-    	master.set(speedScale);
+    	masterLeft.set(0);
+    	masterRight.set(0);
     }
 }
 

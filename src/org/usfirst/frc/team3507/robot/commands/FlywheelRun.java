@@ -7,16 +7,19 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ArmDown extends Command {
+public class FlywheelRun extends Command {
 
-    public ArmDown() {
+	private static double sped;
+	
+    public FlywheelRun(double spd) {
+    	sped = spd;
     }
-    
+
     protected void initialize() {
     }
 
     protected void execute() {
-    	Robot.armAngle.down(0.5);
+    	Robot.flywheel.go(sped);
     }
 
     protected boolean isFinished() {
@@ -24,8 +27,10 @@ public class ArmDown extends Command {
     }
 
     protected void end() {
+    	Robot.flywheel.stop();
     }
 
     protected void interrupted() {
+    	end();
     }
 }

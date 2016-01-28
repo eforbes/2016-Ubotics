@@ -20,7 +20,7 @@ public class Flywheel extends Subsystem
     {
     }
     
-    public void in(double speed)
+    public void go(double speed)
     {
     	motor.set(speed);
     }
@@ -29,12 +29,5 @@ public class Flywheel extends Subsystem
     {
     	motor.set(0);
     }
-    
-    public void out(double speed)
-    {
-    	motor.set(-speed);
-    }
-    
-    
 }
 

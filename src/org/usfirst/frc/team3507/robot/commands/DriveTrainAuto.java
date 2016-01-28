@@ -7,15 +7,17 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class LeftTrackAuto extends Command {
-	
-	private double speed;
+public class DriveTrainAuto extends Command {
 
-    public LeftTrackAuto(int ms, double spd) {
-        super("LeftTrackAuto");
-        requires(Robot.leftTrack);
-    	setTimeout(ms);
-    	speed = -spd;
+	private double speedRight;
+	private double speedLeft;
+	
+	public DriveTrainAuto(int ms, double spdLft, double spdRgt) {
+        super("DriveTrainAuto");
+        requires(Robot.driveTrain);
+        setTimeout(ms);
+        speedRight = spdRgt;
+        speedLeft = spdLft;
     }
 
     // Called just before this Command runs the first time
@@ -24,15 +26,8 @@ public class LeftTrackAuto extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(speed > 0){
-    		Robot.leftTrack.forward(speed, 0);
-    	}
-    	if(speed == 0){
-    		Robot.leftTrack.stop();
-    	}
-    	if(speed < 0){
-    		Robot.leftTrack.backward(speed, 0);
-    	}
+    	Robot.driveTrain.go(speedRight, speedLeft, 0);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -42,7 +37,7 @@ public class LeftTrackAuto extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.leftTrack.stop();
+    	Robot.driveTrain.stop();
     }
 
     // Called when another command which requires one or more of the same

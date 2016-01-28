@@ -21,7 +21,7 @@ public class Intake extends Subsystem
     {
     }
     
-    public void in(double speed)
+    public void go(double speed)
     {
     	motor.set(speed);
     }
@@ -29,11 +29,6 @@ public class Intake extends Subsystem
     public void stop()
     {
     	motor.set(0);
-    }
-    
-    public void out(double speed)
-    {
-    	motor.set(-speed);
     }
 }
 

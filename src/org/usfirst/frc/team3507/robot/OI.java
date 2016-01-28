@@ -1,13 +1,8 @@
 package org.usfirst.frc.team3507.robot;
 
-import org.usfirst.frc.team3507.robot.commands.ArmDown;
-import org.usfirst.frc.team3507.robot.commands.ArmStop;
-import org.usfirst.frc.team3507.robot.commands.ArmUp;
-import org.usfirst.frc.team3507.robot.commands.FlywheelStart;
-import org.usfirst.frc.team3507.robot.commands.FlywheelStop;
-import org.usfirst.frc.team3507.robot.commands.IntakeIn;
-import org.usfirst.frc.team3507.robot.commands.IntakeOut;
-import org.usfirst.frc.team3507.robot.commands.IntakeStop;
+import org.usfirst.frc.team3507.robot.commands.ArmAngle;
+import org.usfirst.frc.team3507.robot.commands.FlywheelRun;
+import org.usfirst.frc.team3507.robot.commands.IntakeAhh;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -56,18 +51,13 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
     
     public OI() {
-    	rightBump.whenPressed(new ArmUp());
-    	rightBump.whenReleased(new ArmStop());
-    	leftBump.whenPressed(new ArmDown());
-    	leftBump.whenReleased(new ArmStop());
+    	rightBump.whileHeld(new ArmAngle(0.5));
+    	leftBump.whileHeld(new ArmAngle(-0.5));
     	
-    	A.whenPressed(new IntakeIn());
-    	A.whenReleased(new IntakeStop());
-    	B.whenPressed(new IntakeOut());
-    	B.whenReleased(new IntakeStop());
+    	A.whileHeld(new IntakeAhh(0.5));
+    	B.whileHeld(new IntakeAhh(-0.5));
     	
-    	X.whenPressed(new FlywheelStart());
-    	X.whenReleased(new FlywheelStop());
+    	X.whileHeld(new FlywheelRun(1.0));
     }
 }
 

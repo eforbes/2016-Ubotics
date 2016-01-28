@@ -4,13 +4,16 @@ import org.usfirst.frc.team3507.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class LeftTrackTele extends Command {
+/**
+ *
+ */
+public class DriveTrainTele extends Command {
 	
 	double deadzone = 0.02;
 
-    public LeftTrackTele() {
-    	super("LeftTrackTele");
-        requires(Robot.leftTrack);
+    public DriveTrainTele() {
+    	super("DriveTrainTele");
+        requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time
@@ -19,15 +22,23 @@ public class LeftTrackTele extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double jAxis = Robot.oi.controller.getRawAxis(1);
-    	
-    	if (jAxis > deadzone) {
-    		Robot.leftTrack.forward(jAxis, deadzone);
-    	} else if (jAxis > -deadzone && jAxis < deadzone) {
-    		Robot.leftTrack.stop();
-    	} else if (jAxis < -deadzone) {
-    		Robot.leftTrack.backward(jAxis, deadzone);
+    	double jAxisRight = Robot.oi.controller.getRawAxis(5);
+    	double jAxisLeft = Robot.oi.controller.getRawAxis(1);
+    	double left = 0;
+    	double right = 0;
+    	if (jAxisRight > deadzone) {
+    		right = jAxisRight;
     	}
+    	else if (jAxisRight < -deadzone) {
+    		right = jAxisRight;
+    	}
+    	if (jAxisLeft > deadzone) {
+    		left = jAxisLeft;
+    	}
+    	else if (jAxisLeft < -deadzone) {
+    		left = jAxisLeft;
+    	}
+    	Robot.driveTrain.go(left, right, deadzone);
     }
 
     // Make this return true when this Command no longer needs to run execute()

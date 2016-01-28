@@ -1,12 +1,8 @@
 
 package org.usfirst.frc.team3507.robot;
 
-import org.usfirst.frc.team3507.robot.commands.ArmDown;
-import org.usfirst.frc.team3507.robot.commands.ArmStop;
-import org.usfirst.frc.team3507.robot.commands.ArmUp;
-import org.usfirst.frc.team3507.robot.commands.LeftTrackTele;
-import org.usfirst.frc.team3507.robot.commands.RightTrackTele;
-import org.usfirst.frc.team3507.robot.subsystems.ArmAngle;
+import org.usfirst.frc.team3507.robot.commands.DriveTrainTele;
+import org.usfirst.frc.team3507.robot.subsystems.Arm;
 import org.usfirst.frc.team3507.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3507.robot.subsystems.Flywheel;
 import org.usfirst.frc.team3507.robot.subsystems.Intake;
@@ -27,19 +23,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	public static final DriveTrain leftTrack = new DriveTrain(0);
-	public static final DriveTrain rightTrack = new DriveTrain(1);
-	public static final ArmAngle armAngle = new ArmAngle();
+	public static final DriveTrain driveTrain = new DriveTrain();
+	public static final Arm arm = new Arm();
 	public static final Flywheel flywheel = new Flywheel();
 	public static final Intake intake = new Intake();
 	
 	public static OI oi;
 
-    Command leftTrackTele = new LeftTrackTele();
-    Command rightTrackTele = new RightTrackTele();
-    Command armUp = new ArmUp();
-    Command armStop = new ArmStop();
-    Command armDown = new ArmDown();
+	Command driveTele;
     
     SendableChooser chooser;
 
@@ -51,8 +42,9 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         chooser = new SendableChooser();
         //chooser.addDefault("Default Auto", new ExampleCommand());
-//        chooser.addObject("My Auto", new MyAutoCommand());
+        //chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
+        driveTele = new DriveTrainTele();
     }
 	
 	/**
@@ -95,8 +87,6 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        leftTrackTele.start();
-        rightTrackTele.start();
     }
     
     /**
