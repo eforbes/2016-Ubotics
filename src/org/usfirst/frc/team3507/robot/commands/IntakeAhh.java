@@ -12,6 +12,7 @@ public class IntakeAhh extends Command {
 	private static double sped;
 	
     public IntakeAhh(double spd) {
+    	super("IntakeAhh");
     	sped = spd;
     }
 

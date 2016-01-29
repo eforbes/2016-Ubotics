@@ -12,6 +12,7 @@ public class FlywheelRun extends Command {
 	private static double sped;
 	
     public FlywheelRun(double spd) {
+    	super("FlywheelRun");
     	sped = spd;
     }
 
