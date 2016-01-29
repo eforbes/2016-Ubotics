@@ -13,6 +13,7 @@ public class IntakeAhh extends Command {
 	
     public IntakeAhh(double spd) {
     	super("IntakeAhh");
+    	requires(Robot.intake);
     	sped = spd;
     }
 

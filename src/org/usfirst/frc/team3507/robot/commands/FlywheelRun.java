@@ -13,6 +13,7 @@ public class FlywheelRun extends Command {
 	
     public FlywheelRun(double spd) {
     	super("FlywheelRun");
+    	requires(Robot.flywheel);
     	sped = spd;
     }
 
