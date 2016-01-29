@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3507.robot.commands;
 
+import org.usfirst.frc.team3507.robot.RoboUtil;
 import org.usfirst.frc.team3507.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -24,21 +25,7 @@ public class DriveTrainTele extends Command {
     protected void execute() {
     	double jAxisRight = Robot.oi.controller.getRawAxis(5);
     	double jAxisLeft = Robot.oi.controller.getRawAxis(1);
-    	double left = 0;
-    	double right = 0;
-    	if (jAxisRight > deadzone) {
-    		right = jAxisRight;
-    	}
-    	else if (jAxisRight < -deadzone) {
-    		right = jAxisRight;
-    	}
-    	if (jAxisLeft > deadzone) {
-    		left = jAxisLeft;
-    	}
-    	else if (jAxisLeft < -deadzone) {
-    		left = jAxisLeft;
-    	}
-    	Robot.driveTrain.go(left, right, deadzone);
+    	Robot.driveTrain.go(RoboUtil.deadzone(jAxisLeft, deadzone), RoboUtil.deadzone(jAxisRight, deadzone));
     }
 
     // Make this return true when this Command no longer needs to run execute()

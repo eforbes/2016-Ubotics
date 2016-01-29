@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3507.robot.subsystems;
 
-import org.usfirst.frc.team3507.robot.RoboUtil;
 import org.usfirst.frc.team3507.robot.RobotMap;
 import org.usfirst.frc.team3507.robot.commands.DriveTrainTele;
 
@@ -23,11 +22,9 @@ public class DriveTrain extends Subsystem {
     	setDefaultCommand(new DriveTrainTele());
     }
     
-    public void go(double left, double right, double deadzone){
-    	double scaleLeft = RoboUtil.deadzone(left, deadzone);
-    	double scaleRight = RoboUtil.deadzone(right, deadzone);
-    	masterLeft.set(scaleLeft);
-    	masterRight.set(scaleRight);
+    public void go(double left, double right){
+    	masterLeft.set(left);
+    	masterRight.set(right);
     }
     
     public void stop(){

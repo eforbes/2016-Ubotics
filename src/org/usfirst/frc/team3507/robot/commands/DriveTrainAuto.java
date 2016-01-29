@@ -26,7 +26,7 @@ public class DriveTrainAuto extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.go(speedRight, speedLeft, 0);
+    	Robot.driveTrain.go(speedRight, speedLeft);
     	
     }
 
