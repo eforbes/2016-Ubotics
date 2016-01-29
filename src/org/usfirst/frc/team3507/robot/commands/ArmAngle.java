@@ -12,6 +12,8 @@ public class ArmAngle extends Command {
 	private static double sped;
 	
     public ArmAngle(double spd) {
+    	super("ArmAngle");
+    	requires(Robot.arm);
     	sped = spd;
     }
     
