@@ -28,7 +28,8 @@ public class Robot extends IterativeRobot {
 	
 	public static OI oi;
     
-    SendableChooser chooser;
+	public static SendableChooser controlType;
+    SendableChooser autoChoose;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -36,10 +37,20 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-        chooser = new SendableChooser();
+		
+		// Autonomous Mode Selector
+        autoChoose = new SendableChooser();
         //chooser.addDefault("Default Auto", new ExampleCommand());
         //chooser.addObject("My Auto", new MyAutoCommand());
-        SmartDashboard.putData("Auto mode", chooser);
+        SmartDashboard.putData("Auto mode", autoChoose);
+        
+        // Drive Control Type Selector
+        controlType = new SendableChooser();
+        controlType.addDefault("Arcade Drive L-R (Default)", 0);
+        controlType.addObject("Arcade Drive R-L", 1);
+        controlType.addObject("Tank Drive", 2);
+        SmartDashboard.putData("Robot Control Type", controlType);
+        
         SmartDashboard.putData(Scheduler.getInstance());
     }
 	

@@ -4,6 +4,7 @@ import org.usfirst.frc.team3507.robot.RobotMap;
 import org.usfirst.frc.team3507.robot.commands.DriveTrainTele;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
@@ -19,6 +20,15 @@ public class DriveTrain extends Subsystem {
     }
 
     public void initDefaultCommand() {
+    	masterRight.setInverted(true);
+    	slave1Left.changeControlMode(TalonControlMode.Follower);
+    	slave2Left.changeControlMode(TalonControlMode.Follower);
+    	slave1Right.changeControlMode(TalonControlMode.Follower);
+    	slave2Right.changeControlMode(TalonControlMode.Follower);
+    	slave1Left.set(RobotMap.leftMaster);
+    	slave2Left.set(RobotMap.leftMaster);
+    	slave1Right.set(RobotMap.rightMaster);
+    	slave2Right.set(RobotMap.rightMaster);
     	setDefaultCommand(new DriveTrainTele());
     }
     
