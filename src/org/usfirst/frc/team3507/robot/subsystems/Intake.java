@@ -23,7 +23,7 @@ public class Intake extends Subsystem
     
     public void go(double speed)
     {
-    	motor.set(speed);
+    	motor.set(0.35);
     }
     
     public void stop()
