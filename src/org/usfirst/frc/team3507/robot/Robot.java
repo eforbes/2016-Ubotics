@@ -1,14 +1,12 @@
 
 package org.usfirst.frc.team3507.robot;
 
-import org.usfirst.frc.team3507.robot.commands.DriveTrainTele;
 import org.usfirst.frc.team3507.robot.subsystems.Arm;
 import org.usfirst.frc.team3507.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3507.robot.subsystems.Flywheel;
 import org.usfirst.frc.team3507.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -29,8 +27,6 @@ public class Robot extends IterativeRobot {
 	public static final Intake intake = new Intake();
 	
 	public static OI oi;
-
-	Command driveTele;
     
     SendableChooser chooser;
 
@@ -44,7 +40,6 @@ public class Robot extends IterativeRobot {
         //chooser.addDefault("Default Auto", new ExampleCommand());
         //chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
-        driveTele = new DriveTrainTele();
     }
 	
 	/**
