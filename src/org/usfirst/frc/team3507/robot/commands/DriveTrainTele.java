@@ -32,8 +32,8 @@ public class DriveTrainTele extends Command {
     	double R;
     	
     	if (Robot.controlType.getSelected().equals(0)) {
-        	jAxisRight = Robot.oi.controller.getRawAxis(4);
-        	jAxisLeft = Robot.oi.controller.getRawAxis(1);
+        	jAxisRight = RoboUtil.deadzone(Robot.oi.controller.getRawAxis(4), deadzone);
+        	jAxisLeft = RoboUtil.deadzone(Robot.oi.controller.getRawAxis(1), deadzone);
         	
         	max = Math.abs(jAxisRight);
         	if (Math.abs(jAxisLeft) > max) max = Math.abs(jAxisLeft);
@@ -59,8 +59,8 @@ public class DriveTrainTele extends Command {
         	}
         	Robot.driveTrain.go(L, R);
     	} else if (Robot.controlType.getSelected().equals(1)) {
-        	jAxisRight = Robot.oi.controller.getRawAxis(5);
-        	jAxisLeft = Robot.oi.controller.getRawAxis(0);
+        	jAxisRight = RoboUtil.deadzone(Robot.oi.controller.getRawAxis(5), deadzone);
+        	jAxisLeft = RoboUtil.deadzone(Robot.oi.controller.getRawAxis(0), deadzone);
         	
         	max = Math.abs(jAxisLeft);
         	if (Math.abs(jAxisRight) > max) max = Math.abs(jAxisRight);
