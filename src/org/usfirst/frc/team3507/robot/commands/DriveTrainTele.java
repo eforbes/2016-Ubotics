@@ -3,6 +3,7 @@ package org.usfirst.frc.team3507.robot.commands;
 import org.usfirst.frc.team3507.robot.RoboUtil;
 import org.usfirst.frc.team3507.robot.Robot;
 
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -10,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveTrainTele extends Command {
 	
-	double deadzone = 0.02;
+	double deadzone;
 
     public DriveTrainTele() {
     	super("DriveTrainTele");
@@ -19,6 +20,8 @@ public class DriveTrainTele extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Preferences prefs = Preferences.getInstance();
+    	deadzone = prefs.getDouble("Deadzone", 0.08);
     }
 
     // Called repeatedly when this Command is scheduled to run

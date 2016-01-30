@@ -4,6 +4,7 @@ import org.usfirst.frc.team3507.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -19,6 +20,7 @@ public class Arm extends Subsystem {
     }
     
     public void go(double speed) {
+    	SmartDashboard.putNumber("Arm Speed", speed);
     	motor.set(speed);
     }
     

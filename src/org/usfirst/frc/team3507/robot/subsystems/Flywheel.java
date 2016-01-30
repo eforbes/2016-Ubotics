@@ -22,7 +22,7 @@ public class Flywheel extends Subsystem
     
     public void go(double speed)
     {
-    	motor.set(speed);
+    	motor.set(-1);
     }
     
     public void stop()

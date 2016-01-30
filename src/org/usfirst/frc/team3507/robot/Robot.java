@@ -94,6 +94,9 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        SmartDashboard.putNumber("Left Speed", driveTrain.speedL);
+        SmartDashboard.putNumber("Right Speed", driveTrain.speedR);
+        
     }
     
     /**

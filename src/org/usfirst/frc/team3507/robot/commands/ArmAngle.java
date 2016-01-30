@@ -14,14 +14,14 @@ public class ArmAngle extends Command {
     public ArmAngle(double spd) {
     	super("ArmAngle");
     	requires(Robot.arm);
-    	sped = spd;
+    	//sped = spd;
     }
     
     protected void initialize() {
     }
 
     protected void execute() {
-    	Robot.arm.go(sped);
+    	Robot.arm.go(0.5);
     }
 
     protected boolean isFinished() {
