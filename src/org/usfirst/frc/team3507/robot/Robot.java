@@ -96,6 +96,8 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
         SmartDashboard.putNumber("Left Speed", driveTrain.speedL);
         SmartDashboard.putNumber("Right Speed", driveTrain.speedR);
+        SmartDashboard.putNumber("Flywheel Position", flywheel.motor.getAnalogInPosition());
+        SmartDashboard.putNumber("Flywheel Velocity", flywheel.motor.getAnalogInVelocity());
         
     }
     
