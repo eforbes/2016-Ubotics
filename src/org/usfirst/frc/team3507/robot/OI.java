@@ -5,6 +5,7 @@ import org.usfirst.frc.team3507.robot.commands.FlywheelRun;
 import org.usfirst.frc.team3507.robot.commands.IntakeAhh;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -23,16 +24,16 @@ public class OI {
     // commands the same as any other Button.
 	
     public Joystick controller = new Joystick(RobotMap.controller);
-    public Button A = new JoystickButton(controller, 0),
-    		B = new JoystickButton(controller, 1),
-    		X = new JoystickButton(controller, 2),
-    		Y = new JoystickButton(controller, 3),
-    		leftBump = new JoystickButton(controller, 4),
-    		rightBump = new JoystickButton(controller, 5),
-    		back = new JoystickButton(controller, 6),
-    		start = new JoystickButton(controller, 7),
-    		leftStick = new JoystickButton(controller, 8),
-    		rightStick = new JoystickButton(controller, 9);
+    public Button A = new JoystickButton(controller, 1),
+    		B = new JoystickButton(controller, 2),
+    		X = new JoystickButton(controller, 3),
+    		Y = new JoystickButton(controller, 4),
+    		leftBump = new JoystickButton(controller, 5),
+    		rightBump = new JoystickButton(controller, 6),
+    		back = new JoystickButton(controller, 7),
+    		start = new JoystickButton(controller, 8),
+    		leftStick = new JoystickButton(controller, 9),
+    		rightStick = new JoystickButton(controller, 10);
     
     //// TRIGGERING COMMANDS WITH BUTTONS
     // Once you have a button, it's trivial to bind it to a button in one of
@@ -51,13 +52,18 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
     
     public OI() {
-    	rightBump.whileHeld(new ArmAngle(0.5));
-    	leftBump.whileHeld(new ArmAngle(-0.5));
+    	Preferences prefs = Preferences.getInstance();
+    	double armSpeed = prefs.getDouble("Arm Angle Speed", 0.5);
+    	double intakeSpeed = prefs.getDouble("Intake Speed", 0.5);
+    	double flywheelSpeed = prefs.getDouble("Flywheel Speed", 1);
     	
-    	A.whileHeld(new IntakeAhh(0.5));
-    	B.whileHeld(new IntakeAhh(-0.5));
+    	rightBump.whileHeld(new ArmAngle(armSpeed));
+    	leftBump.whileHeld(new ArmAngle(-armSpeed));
     	
-    	X.whileHeld(new FlywheelRun(1.0));
+    	A.whileHeld(new IntakeAhh(intakeSpeed));
+    	B.whileHeld(new IntakeAhh(-intakeSpeed));
+    	
+    	X.whileHeld(new FlywheelRun(flywheelSpeed));
     }
 }
 
