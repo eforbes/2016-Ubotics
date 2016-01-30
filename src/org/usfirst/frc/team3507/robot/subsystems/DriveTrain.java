@@ -21,9 +21,6 @@ public class DriveTrain extends Subsystem {
     public double speedR;
     
     public DriveTrain() {
-    }
-
-    public void initDefaultCommand() {
     	masterRight.setInverted(true);
     	slave1Left.changeControlMode(TalonControlMode.Follower);
     	slave2Left.changeControlMode(TalonControlMode.Follower);
@@ -33,6 +30,9 @@ public class DriveTrain extends Subsystem {
     	slave2Left.set(RobotMap.leftMaster);
     	slave1Right.set(RobotMap.rightMaster);
     	slave2Right.set(RobotMap.rightMaster);
+    }
+
+    public void initDefaultCommand() {
     	setDefaultCommand(new DriveTrainTele());
     }
     
