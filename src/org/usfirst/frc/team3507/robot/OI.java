@@ -57,8 +57,8 @@ public class OI {
     	double intakeSpeed = prefs.getDouble("Intake Speed", 0.5);
     	double flywheelSpeed = prefs.getDouble("Flywheel Speed", 1);
     	
+    	leftBump.whileHeld(new ArmAngle(-armSpeed));   
     	rightBump.whileHeld(new ArmAngle(armSpeed));
-    	leftBump.whileHeld(new ArmAngle(-armSpeed));
     	
     	A.whileHeld(new IntakeAhh(intakeSpeed));
     	B.whileHeld(new IntakeAhh(-intakeSpeed));
