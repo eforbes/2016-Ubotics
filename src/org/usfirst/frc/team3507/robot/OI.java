@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3507.robot;
 
 import org.usfirst.frc.team3507.robot.commands.ArmAngle;
+import org.usfirst.frc.team3507.robot.commands.ArmAngleR;
 import org.usfirst.frc.team3507.robot.commands.FlywheelRun;
 import org.usfirst.frc.team3507.robot.commands.IntakeAhh;
 
@@ -57,8 +58,8 @@ public class OI {
     	double intakeSpeed = prefs.getDouble("Intake Speed", 0.5);
     	double flywheelSpeed = prefs.getDouble("Flywheel Speed", 1);
     	
-    	leftBump.whileHeld(new ArmAngle(-armSpeed));   
     	rightBump.whileHeld(new ArmAngle(armSpeed));
+    	leftBump.whileHeld(new ArmAngleR(-armSpeed));   
     	
     	A.whileHeld(new IntakeAhh(intakeSpeed));
     	B.whileHeld(new IntakeAhh(-intakeSpeed));

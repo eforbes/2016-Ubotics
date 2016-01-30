@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ArmAngle extends Command {
+public class ArmAngleR extends Command {
+
+	public static double sped;
 	
-	private static double sped;
-	
-    public ArmAngle(double spd) {
-    	super("ArmAngle");
+    public ArmAngleR(double spd) {
+    	super("ArmAngleR");
     	requires(Robot.arm);
     	sped = spd;
     }
@@ -21,7 +21,7 @@ public class ArmAngle extends Command {
     }
 
     protected void execute() {
-    	Robot.arm.go(0.2);
+    	Robot.arm.go(-0.2);
     }
 
     protected boolean isFinished() {
