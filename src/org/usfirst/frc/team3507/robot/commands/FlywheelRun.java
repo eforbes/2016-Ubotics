@@ -10,18 +10,25 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class FlywheelRun extends Command {
 
+	private boolean backwards;
 	Preferences prefs = Preferences.getInstance();
 	
-    public FlywheelRun() {
+    public FlywheelRun(boolean b) {
     	super("FlywheelRun");
     	requires(Robot.flywheel);
+    	backwards = b;
     }
 
     protected void initialize() {
     }
 
     protected void execute() {
-    	Robot.flywheel.go(prefs.getDouble("Flywheel Speed", 0.5));
+    	if (!backwards) {
+    		Robot.flywheel.go(prefs.getDouble("Flywheel Speed", 0.5));
+    	} else {
+
+    		Robot.flywheel.go(-(prefs.getDouble("Flywheel Speed", 0.5)));
+    	}
     }
 
     protected boolean isFinished() {

@@ -48,7 +48,9 @@ public class Robot extends IterativeRobot {
         controlType = new SendableChooser();
         controlType.addDefault("Arcade Drive L-R (Default)", 0);
         controlType.addObject("Arcade Drive R-L", 1);
-        controlType.addObject("Tank Drive", 2);
+        controlType.addObject("Acade Drive L", 2);
+        controlType.addObject("Tank Drive", 3);
+        controlType.addObject("Paralyzed", 4);
         SmartDashboard.putData("Robot Control Type", controlType);
         
         SmartDashboard.putData(Scheduler.getInstance());

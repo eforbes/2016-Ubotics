@@ -5,7 +5,6 @@ import org.usfirst.frc.team3507.robot.commands.FlywheelRun;
 import org.usfirst.frc.team3507.robot.commands.IntakeAhh;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -52,13 +51,13 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
     
     public OI() {
-    	rightBump.whileHeld(new ArmAngle());
-    	leftBump.whileHeld(new ArmAngle());   
+    	rightBump.whileHeld(new ArmAngle(false));
+    	leftBump.whileHeld(new ArmAngle(true));   
     	
-    	A.whileHeld(new IntakeAhh());
-    	B.whileHeld(new IntakeAhh());
+    	A.whileHeld(new IntakeAhh(false));
+    	B.whileHeld(new IntakeAhh(true));
     	
-    	X.whileHeld(new FlywheelRun());
+    	X.whileHeld(new FlywheelRun(true));
     }
 }
 

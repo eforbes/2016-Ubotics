@@ -10,18 +10,25 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ArmAngle extends Command {
 	
+	private boolean backwards;
 	Preferences prefs = Preferences.getInstance();
 	
-    public ArmAngle() {
+    public ArmAngle(boolean b) {
     	super("ArmAngle");
     	requires(Robot.arm);
+    	backwards = b;
     }
     
     protected void initialize() {
     }
 
     protected void execute() {
-    	Robot.arm.go(prefs.getDouble("Arm Angle Speed", 0.5));
+    	if (!backwards) {
+    		Robot.arm.go(prefs.getDouble("Arm Angle Speed", 0.5));
+    	} else {
+
+    		Robot.arm.go(-(prefs.getDouble("Arm Angle Speed", 0.5)));
+    	}
     }
 
     protected boolean isFinished() {
