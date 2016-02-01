@@ -15,6 +15,7 @@ public class Intake extends Subsystem
 	
 	public Intake() 
 	{
+		motor.enableBrakeMode(false);
 	}
 	
     public void initDefaultCommand() 
@@ -23,7 +24,7 @@ public class Intake extends Subsystem
     
     public void go(double speed)
     {
-    	motor.set(0.35);
+    	motor.set(speed);
     }
     
     public void stop()

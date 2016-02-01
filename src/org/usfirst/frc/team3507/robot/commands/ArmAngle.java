@@ -2,6 +2,7 @@ package org.usfirst.frc.team3507.robot.commands;
 
 import org.usfirst.frc.team3507.robot.Robot;
 
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -9,19 +10,18 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ArmAngle extends Command {
 	
-	private static double sped;
+	Preferences prefs = Preferences.getInstance();
 	
-    public ArmAngle(double spd) {
+    public ArmAngle() {
     	super("ArmAngle");
     	requires(Robot.arm);
-    	sped = spd;
     }
     
     protected void initialize() {
     }
 
     protected void execute() {
-    	Robot.arm.go(0.2);
+    	Robot.arm.go(prefs.getDouble("Arm Angle Speed", 0.5));
     }
 
     protected boolean isFinished() {

@@ -16,6 +16,7 @@ public class Flywheel extends Subsystem
 	public Flywheel()
 	{
 		motor.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
+		motor.enableBrakeMode(false);
 	}
 	
     public void initDefaultCommand() 
@@ -24,7 +25,7 @@ public class Flywheel extends Subsystem
     
     public void go(double speed)
     {
-    	motor.set(-1);
+    	motor.set(speed);
     }
     
     public void stop()

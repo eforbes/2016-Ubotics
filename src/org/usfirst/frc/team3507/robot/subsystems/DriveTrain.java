@@ -30,6 +30,12 @@ public class DriveTrain extends Subsystem {
     	slave2Left.set(RobotMap.leftMaster);
     	slave1Right.set(RobotMap.rightMaster);
     	slave2Right.set(RobotMap.rightMaster);
+    	masterLeft.enableBrakeMode(true);
+    	slave1Left.enableBrakeMode(true);
+    	slave2Left.enableBrakeMode(true);
+    	masterRight.enableBrakeMode(true);
+    	slave1Right.enableBrakeMode(true);
+    	slave2Right.enableBrakeMode(true);
     }
 
     public void initDefaultCommand() {

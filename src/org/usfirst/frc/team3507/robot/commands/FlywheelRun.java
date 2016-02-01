@@ -2,6 +2,7 @@ package org.usfirst.frc.team3507.robot.commands;
 
 import org.usfirst.frc.team3507.robot.Robot;
 
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -9,19 +10,18 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class FlywheelRun extends Command {
 
-	private static double sped;
+	Preferences prefs = Preferences.getInstance();
 	
-    public FlywheelRun(double spd) {
+    public FlywheelRun() {
     	super("FlywheelRun");
     	requires(Robot.flywheel);
-    	sped = spd;
     }
 
     protected void initialize() {
     }
 
     protected void execute() {
-    	Robot.flywheel.go(sped);
+    	Robot.flywheel.go(prefs.getDouble("Flywheel Speed", 0.5));
     }
 
     protected boolean isFinished() {

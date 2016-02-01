@@ -2,6 +2,7 @@ package org.usfirst.frc.team3507.robot.commands;
 
 import org.usfirst.frc.team3507.robot.Robot;
 
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -9,19 +10,18 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class IntakeAhh extends Command {
 
-	private static double sped;
+	Preferences prefs = Preferences.getInstance();
 	
-    public IntakeAhh(double spd) {
+    public IntakeAhh() {
     	super("IntakeAhh");
     	requires(Robot.intake);
-    	sped = spd;
     }
 
     protected void initialize() {
     }
 
     protected void execute() {
-    	Robot.intake.go(sped);
+    	Robot.intake.go(prefs.getDouble("Intake Speed", 0.5));
     }
 
     protected boolean isFinished() {

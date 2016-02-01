@@ -14,6 +14,7 @@ public class Arm extends Subsystem {
 	public CANTalon motor = new CANTalon(RobotMap.armMotor);
 	
 	public Arm() {
+		motor.enableBrakeMode(true);
 	}
 	
     public void initDefaultCommand() {
