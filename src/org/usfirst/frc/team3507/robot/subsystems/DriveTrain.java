@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3507.robot.subsystems;
 
+import org.usfirst.frc.team3507.robot.Robot;
 import org.usfirst.frc.team3507.robot.RobotMap;
 import org.usfirst.frc.team3507.robot.commands.DriveTrainTele;
 
@@ -47,8 +48,22 @@ public class DriveTrain extends Subsystem {
     	double fact = prefs.getDouble("Drive Factor", 1);
     	speedL = left;
     	speedR = right;
-    	masterLeft.set(left*fact);
-    	masterRight.set(right*fact);
+    	
+    	if (Robot.accelType.getSelected().equals(0)) {
+    		masterLeft.set(left*fact);
+    		masterRight.set(right*fact);
+    	} else {
+    		if (left < 0) {
+    			masterLeft.set(-(Math.pow(left, 2)*fact));
+    		} else {
+    			masterLeft.set((Math.pow(left, 2)*fact));
+    		}
+    		if (right < 0) {
+    			masterRight.set(-(Math.pow(right, 2)*fact));
+    		} else {
+    			masterRight.set((Math.pow(right, 2)*fact));
+    		}
+    	}
     }
     
     public void stop(){

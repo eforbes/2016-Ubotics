@@ -27,7 +27,8 @@ public class Robot extends IterativeRobot {
 	public static final Intake intake = new Intake();
 	
 	public static OI oi;
-    
+
+	public static SendableChooser accelType;
 	public static SendableChooser controlType;
     SendableChooser autoChoose;
 
@@ -52,6 +53,12 @@ public class Robot extends IterativeRobot {
         controlType.addObject("Tank Drive", 3);
         controlType.addObject("Paralyzed", 4);
         SmartDashboard.putData("Robot Control Type", controlType);
+        
+        // Acceleration Type Selector
+        accelType = new SendableChooser();
+        accelType.addDefault("Linear (Default)", 0);
+        accelType.addObject("Quadratic", 1);
+        SmartDashboard.putData("Acceleration Type", accelType);
         
         SmartDashboard.putData(Scheduler.getInstance());
     }
@@ -100,7 +107,6 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Right Speed", driveTrain.speedR);
         SmartDashboard.putNumber("Flywheel Position", flywheel.motor.getPulseWidthPosition());
         SmartDashboard.putNumber("Flywheel Velocity", ((double)flywheel.motor.getPulseWidthVelocity()/4096));
-        
     }
     
     /**
