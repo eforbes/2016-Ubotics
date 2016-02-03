@@ -106,7 +106,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Left Speed", driveTrain.speedL);
         SmartDashboard.putNumber("Right Speed", driveTrain.speedR);
         SmartDashboard.putNumber("Flywheel Position", flywheel.motor.getPulseWidthPosition());
-        SmartDashboard.putNumber("Flywheel Velocity", ((double)flywheel.motor.getPulseWidthVelocity()/4096));
+        SmartDashboard.putNumber("Flywheel Velocity", (((double)flywheel.motor.getPulseWidthRiseToRiseUs()*60000000)/4096));
     }
     
     /**
