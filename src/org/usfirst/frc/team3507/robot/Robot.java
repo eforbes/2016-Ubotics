@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team3507.robot;
 
+import org.usfirst.frc.team3507.robot.commands.AutoTarget;
 import org.usfirst.frc.team3507.robot.subsystems.Arm;
 import org.usfirst.frc.team3507.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3507.robot.subsystems.Flywheel;
@@ -31,6 +32,15 @@ public class Robot extends IterativeRobot {
 	public static SendableChooser accelType;
 	public static SendableChooser controlType;
     SendableChooser autoChoose;
+    
+    //CameraServer cam;
+    
+    public Robot() {
+        // Camera Stuff
+        /*cam = CameraServer.getInstance();
+        cam.setQuality(50);
+        cam.startAutomaticCapture("cam0");*/
+    }
 
     /**
      * This function is run when the robot is first started up and should be
@@ -61,6 +71,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Acceleration Type", accelType);
         
         SmartDashboard.putData(Scheduler.getInstance());
+        
+        SmartDashboard.putData(new AutoTarget());
     }
 	
 	/**

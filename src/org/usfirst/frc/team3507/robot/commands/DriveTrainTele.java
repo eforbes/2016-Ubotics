@@ -56,7 +56,7 @@ public class DriveTrainTele extends Command {
     	} else if (Robot.controlType.getSelected().equals(3)) {
         	jAxisRight = Robot.oi.controller.getRawAxis(5);
         	jAxisLeft = Robot.oi.controller.getRawAxis(1);
-        	Robot.driveTrain.go(RoboUtil.deadzone(jAxisLeft, deadzone), RoboUtil.deadzone(jAxisRight, deadzone));
+        	Robot.driveTrain.go(-RoboUtil.deadzone(jAxisLeft, deadzone), -RoboUtil.deadzone(jAxisRight, deadzone));
     	} else if (Robot.controlType.getSelected().equals(4)) {
     		Robot.driveTrain.go(0, 0);
     	}
