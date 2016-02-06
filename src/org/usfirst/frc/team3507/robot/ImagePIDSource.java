@@ -15,7 +15,7 @@ public class ImagePIDSource implements PIDSource {
 
 	@Override
 	public PIDSourceType getPIDSourceType() {
-		return null;
+		return PIDSourceType.kDisplacement;
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class ImagePIDSource implements PIDSource {
 		if (x.length > 0) {
 			return x[0];
 		} else {
-			return 0;
+			return 320;
 		}
 	}
 }
