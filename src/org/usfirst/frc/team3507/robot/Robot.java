@@ -7,7 +7,11 @@ import org.usfirst.frc.team3507.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3507.robot.subsystems.Flywheel;
 import org.usfirst.frc.team3507.robot.subsystems.Intake;
 
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -34,12 +38,16 @@ public class Robot extends IterativeRobot {
     SendableChooser autoChoose;
     
     //CameraServer cam;
+    AHRS ahrs;
     
     public Robot() {
         // Camera Stuff
         /*cam = CameraServer.getInstance();
         cam.setQuality(50);
         cam.startAutomaticCapture("cam0");*/
+    	
+    	// Gyro Stuff
+    	ahrs = new AHRS(I2C.Port.kMXP);
     }
 
     /**

@@ -28,4 +28,6 @@ public class RobotMap {
 	public static int armMotor = 7;
 	public static int intakeMotor = 8;
 	public static int flywheelMotor = 9;
+	
+	public static int gyroPort = 0;
 }
