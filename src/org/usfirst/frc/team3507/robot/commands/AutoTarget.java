@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3507.robot.commands;
 
+import org.usfirst.frc.team3507.robot.ImagePIDOutput;
 import org.usfirst.frc.team3507.robot.ImagePIDSource;
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -24,7 +25,7 @@ public class AutoTarget extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	turnPID = new PIDController(prefs.getDouble("TurnP", 0), prefs.getDouble("TurnI", 0), prefs.getDouble("TurnD", 0), new ImagePIDSource(), output)
+    	turnPID = new PIDController(prefs.getDouble("TurnP", 0), prefs.getDouble("TurnI", 0), prefs.getDouble("TurnD", 0), new ImagePIDSource(), new ImagePIDOutput());
     }
 
     // Called repeatedly when this Command is scheduled to run
