@@ -38,7 +38,7 @@ public class Robot extends IterativeRobot {
     SendableChooser autoChoose;
     
     //CameraServer cam;
-    AHRS ahrs;
+    public static AHRS ahrs;
     
     public Robot() {
         // Camera Stuff
@@ -127,6 +127,10 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Right Speed", driveTrain.speedR);
         SmartDashboard.putNumber("Flywheel Position", flywheel.motor.getPulseWidthPosition());
         SmartDashboard.putNumber("Flywheel Velocity", (((double)flywheel.motor.getPulseWidthRiseToRiseUs()*60000000)/4096));
+        SmartDashboard.putNumber("Yah!", ahrs.getYaw());
+        SmartDashboard.putNumber("Pitch", ahrs.getPitch());
+        SmartDashboard.putNumber("Angle", ahrs.getAngle());
+        SmartDashboard.putNumber("Roll", ahrs.getRoll());
     }
     
     /**
