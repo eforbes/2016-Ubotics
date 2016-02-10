@@ -1,6 +1,8 @@
 
 package org.usfirst.frc.team3507.robot;
 
+import java.io.IOException;
+
 import org.usfirst.frc.team3507.robot.commands.AutoTarget;
 import org.usfirst.frc.team3507.robot.subsystems.Arm;
 import org.usfirst.frc.team3507.robot.subsystems.DriveTrain;
@@ -11,7 +13,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -39,8 +41,15 @@ public class Robot extends IterativeRobot {
     
     //CameraServer cam;
     public static AHRS ahrs;
+    public static PowerDistributionPanel pdp;
     
     public Robot() {
+    	try {
+            new ProcessBuilder("/home/lvuser/grip").inheritIO().start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    	
         // Camera Stuff
         /*cam = CameraServer.getInstance();
         cam.setQuality(50);
@@ -48,6 +57,7 @@ public class Robot extends IterativeRobot {
     	
     	// Gyro Stuff
     	ahrs = new AHRS(I2C.Port.kMXP);
+    	pdp = new PowerDistributionPanel();
     }
 
     /**
@@ -125,12 +135,10 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
         SmartDashboard.putNumber("Left Speed", driveTrain.speedL);
         SmartDashboard.putNumber("Right Speed", driveTrain.speedR);
-        SmartDashboard.putNumber("Flywheel Position", flywheel.motor.getPulseWidthPosition());
-        SmartDashboard.putNumber("Flywheel Velocity", (((double)flywheel.motor.getPulseWidthRiseToRiseUs()*60000000)/4096));
-        SmartDashboard.putNumber("Yah!", ahrs.getYaw());
-        SmartDashboard.putNumber("Pitch", ahrs.getPitch());
+        SmartDashboard.putNumber("Flywheel Speed", flywheel.motor.getSpeed());
         SmartDashboard.putNumber("Angle", ahrs.getAngle());
-        SmartDashboard.putNumber("Roll", ahrs.getRoll());
+        SmartDashboard.putNumber("Voltage", pdp.getVoltage());
+        SmartDashboard.putNumber("Current", pdp.getTotalCurrent());
     }
     
     /**

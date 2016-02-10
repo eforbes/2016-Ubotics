@@ -4,6 +4,7 @@ import org.usfirst.frc.team3507.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -15,6 +16,7 @@ public class Flywheel extends Subsystem
 	
 	public Flywheel()
 	{
+		motor.changeControlMode(TalonControlMode.Speed);
 		motor.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
 		motor.enableBrakeMode(false);
 	}
