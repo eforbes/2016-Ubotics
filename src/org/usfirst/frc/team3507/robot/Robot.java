@@ -138,7 +138,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Flywheel Speed", flywheel.motor.getSpeed());
         SmartDashboard.putNumber("Angle", ahrs.getAngle());
         SmartDashboard.putNumber("Voltage", pdp.getVoltage());
-        SmartDashboard.putNumber("Current", pdp.getTotalCurrent());
+        //SmartDashboard.putNumber("Current", pdp.getTotalCurrent());
     }
     
     /**

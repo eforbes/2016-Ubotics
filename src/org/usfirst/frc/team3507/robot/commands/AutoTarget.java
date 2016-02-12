@@ -35,6 +35,7 @@ public class AutoTarget extends Command {
     	count = 0;
     	double[] x = table.getNumberArray("centerX", new double[0]);
     	double deltaAngle = (x[0] - prefs.getDouble("Turn Setpoint", 160)) * prefs.getDouble("K", 0);
+    	SmartDashboard.putNumber("Delta Angle", deltaAngle);
     	turnPID = new PIDController(prefs.getDouble("Turn P", 0), prefs.getDouble("Turn I", 0), prefs.getDouble("Turn D", 0), Robot.ahrs, new ImagePIDOutput());
     	turnPID.setContinuous(true);
     	turnPID.setInputRange(0, 360);
@@ -61,6 +62,7 @@ public class AutoTarget extends Command {
         	}
         	SmartDashboard.putNumber("Setpoint", fix(Robot.ahrs.getAngle() + deltaAngle));
     		turnPID.setSetpoint(fix(Robot.ahrs.getAngle() + deltaAngle));
+    		SmartDashboard.putNumber("Delta Angle", deltaAngle);
     	}
     	
     	if (x.length > 0) SmartDashboard.putNumber("Target X", x[0]);
