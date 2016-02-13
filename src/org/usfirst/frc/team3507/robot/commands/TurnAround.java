@@ -14,6 +14,8 @@ public class TurnAround extends Command {
 
 	Preferences prefs;
 	PIDController turnPID;
+	private double setpoint;
+	private boolean running;
 	
     public TurnAround() {
     	requires(Robot.driveTrain);
@@ -26,25 +28,37 @@ public class TurnAround extends Command {
     	turnPID.setContinuous(true);
     	turnPID.setInputRange(0, 360);
     	turnPID.setOutputRange(-1, 1);
-    	double setpoint = Robot.ahrs.getAngle() + 180;
+    	setpoint = Robot.ahrs.getAngle() + 180;
     	turnPID.setSetpoint(setpoint>360?setpoint-180:setpoint);
     	turnPID.setAbsoluteTolerance(prefs.getDouble("Gyro Tolerance", 5));
     	turnPID.enable();
+    	running = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if (!running) {
+        	setpoint = Robot.ahrs.getAngle() + 180;
+        	turnPID.setSetpoint(setpoint>360?setpoint-180:setpoint);
+        	running = true;
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return turnPID.onTarget();
+		double pixelDif = Math.abs(Robot.ahrs.getAngle() - setpoint);
+		if(pixelDif < prefs.getDouble("Gyro Tolerance", 10)) {
+			return true;        	
+		} else {
+			return false;
+		}
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	Robot.driveTrain.stop();
     	turnPID.disable();
+    	running = false;
     }
 
     // Called when another command which requires one or more of the same
