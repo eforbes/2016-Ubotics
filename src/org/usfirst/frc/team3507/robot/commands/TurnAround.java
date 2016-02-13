@@ -6,6 +6,7 @@ import org.usfirst.frc.team3507.robot.TurnPIDOutput;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -13,9 +14,14 @@ import edu.wpi.first.wpilibj.command.Command;
 public class TurnAround extends Command {
 
 	Preferences prefs;
-	PIDController turnPID;
+	private int count = 0;
+	private int index = 0;
+	private double sum = 0;
 	private double setpoint;
 	private boolean running;
+	private int maxArraySize = 10;
+	private PIDController turnPID;
+	private double[] difs = new double[maxArraySize];
 	
     public TurnAround() {
     	requires(Robot.driveTrain);
@@ -29,7 +35,8 @@ public class TurnAround extends Command {
     	turnPID.setInputRange(0, 360);
     	turnPID.setOutputRange(-1, 1);
     	setpoint = Robot.ahrs.getAngle() + 180;
-    	turnPID.setSetpoint(setpoint>360?setpoint-180:setpoint);
+    	setpoint = setpoint>360?setpoint-360:setpoint;
+    	turnPID.setSetpoint(setpoint);
     	turnPID.setAbsoluteTolerance(prefs.getDouble("Gyro Tolerance", 5));
     	turnPID.enable();
     	running = false;
@@ -39,24 +46,40 @@ public class TurnAround extends Command {
     protected void execute() {
     	if (!running) {
         	setpoint = Robot.ahrs.getAngle() + 180;
-        	turnPID.setSetpoint(setpoint>360?setpoint-180:setpoint);
+        	setpoint = setpoint>360?setpoint-360:setpoint;
+        	turnPID.setSetpoint(setpoint);
         	running = true;
     	}
+    	SmartDashboard.putNumber("Setpoint", setpoint);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-		double pixelDif = Math.abs(Robot.ahrs.getAngle() - setpoint);
-		if(pixelDif < prefs.getDouble("Gyro Tolerance", 10)) {
+    	double gyroDif = Math.abs(Robot.ahrs.getAngle() - setpoint);
+    	SmartDashboard.putNumber("Gyro Dif", gyroDif);
+    	if (count == maxArraySize) {
+    		sum -= difs[index];
+    		count++;
+    	}
+    	difs[index] = gyroDif;
+    	sum += gyroDif;
+    	count++;
+    	double avgDif = sum / count;
+    	SmartDashboard.putNumber("Average Diff", avgDif);
+    	index++;
+    	if (index >= maxArraySize) {
+    		index = 0;
+    	}
+		if(avgDif < prefs.getDouble("Gyro Tolerance", 10)) {
 			return true;        	
 		} else {
 			return false;
 		}
+    	//return turnPID.onTarget();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveTrain.stop();
     	turnPID.disable();
     	running = false;
     }
