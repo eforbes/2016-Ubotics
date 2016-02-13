@@ -4,6 +4,7 @@ package org.usfirst.frc.team3507.robot;
 import java.io.IOException;
 
 import org.usfirst.frc.team3507.robot.commands.AutoTarget;
+import org.usfirst.frc.team3507.robot.commands.TurnAround;
 import org.usfirst.frc.team3507.robot.subsystems.Arm;
 import org.usfirst.frc.team3507.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3507.robot.subsystems.Flywheel;
@@ -44,12 +45,6 @@ public class Robot extends IterativeRobot {
     public static PowerDistributionPanel pdp;
     
     public Robot() {
-    	try {
-            new ProcessBuilder("/home/lvuser/grip").inheritIO().start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    	
         // Camera Stuff
         /*cam = CameraServer.getInstance();
         cam.setQuality(50);
@@ -91,6 +86,13 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData(Scheduler.getInstance());
         
         SmartDashboard.putData(new AutoTarget());
+        SmartDashboard.putData(new TurnAround());
+        
+    	try {
+            new ProcessBuilder("/home/lvuser/grip").inheritIO().start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 	
 	/**
