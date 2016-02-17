@@ -23,4 +23,16 @@ public class MotorInversion extends Command {
     	Robot.driveTrain.masterLeft.setInverted(true);
     	Robot.driveTrain.masterRight.setInverted(true);
     }
+
+	protected boolean isFinished() {
+		return false;
+	}
+
+	protected void end() {
+		
+	}
+
+	protected void interrupted() {
+		
+	}
 }
