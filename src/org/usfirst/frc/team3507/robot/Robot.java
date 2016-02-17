@@ -38,6 +38,7 @@ public class Robot extends IterativeRobot {
 
 	public static SendableChooser accelType;
 	public static SendableChooser controlType;
+	public static SendableChooser flywheelMode;
     SendableChooser autoChoose;
     
     //CameraServer cam;
@@ -76,6 +77,14 @@ public class Robot extends IterativeRobot {
         controlType.addObject("Tank Drive", 3);
         controlType.addObject("Paralyzed", 4);
         SmartDashboard.putData("Robot Control Type", controlType);
+        
+        // Flywheel Type Selector
+        flywheelMode = new SendableChooser();
+        flywheelMode.addDefault("Off", 0);
+        flywheelMode.addObject("Slow", 1);
+        flywheelMode.addObject("Fast", 2);
+        flywheelMode.addObject("Auto", 3);
+        SmartDashboard.putData("Flywheel Mode", flywheelMode);
         
         // Acceleration Type Selector
         accelType = new SendableChooser();

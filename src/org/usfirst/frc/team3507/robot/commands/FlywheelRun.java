@@ -23,11 +23,30 @@ public class FlywheelRun extends Command {
     }
 
     protected void execute() {
-    	if (!backwards) {
-    		Robot.flywheel.go(prefs.getDouble("Flywheel Speed", 0.5));
+    	if (!Robot.flywheelMode.getSelected().equals(0)) {
+    		if (Robot.flywheelMode.getSelected().equals(1)) {
+        		if (!backwards) {
+        			Robot.flywheel.go(prefs.getDouble("Flywheel Slow Speed", 4500));
+        		} else {
+        			Robot.flywheel.go(-(prefs.getDouble("Flywheel Slow Speed", 4500)));
+        		}
+    		}
+    		if (Robot.flywheelMode.getSelected().equals(2)) {
+        		if (!backwards) {
+        			Robot.flywheel.go(prefs.getDouble("Flywheel Fast Speed", 6150));
+        		} else {
+        			Robot.flywheel.go(-(prefs.getDouble("Flywheel Fast Speed", 6150)));
+        		}
+    		}
+    		if (Robot.flywheelMode.getSelected().equals(3)) {
+        		if (!backwards) {
+        			Robot.flywheel.go(prefs.getDouble("Flywheel Auto Speed", 6000));
+        		} else {
+        			Robot.flywheel.go(-(prefs.getDouble("Flywheel Auto Speed", 6000)));
+        		}
+    		}
     	} else {
-
-    		Robot.flywheel.go(-(prefs.getDouble("Flywheel Speed", 0.5)));
+    		Robot.flywheel.stop();
     	}
     }
 
