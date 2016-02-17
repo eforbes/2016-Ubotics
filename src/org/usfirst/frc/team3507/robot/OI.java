@@ -3,6 +3,7 @@ package org.usfirst.frc.team3507.robot;
 import org.usfirst.frc.team3507.robot.commands.ArmAngle;
 import org.usfirst.frc.team3507.robot.commands.FlywheelRun;
 import org.usfirst.frc.team3507.robot.commands.IntakeAhh;
+import org.usfirst.frc.team3507.robot.commands.MotorInversion;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -58,6 +59,7 @@ public class OI {
     	B.whileHeld(new IntakeAhh(true));
     	
     	X.whileHeld(new FlywheelRun(true));
+    	Y.toggleWhenPressed(new MotorInversion());
     }
 }
 
