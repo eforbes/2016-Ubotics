@@ -16,11 +16,12 @@ public class Flywheel extends Subsystem
 	
 	public Flywheel()
 	{
-		motor.changeControlMode(TalonControlMode.Speed);
+		// motor.changeControlMode(TalonControlMode.Speed);
 		motor.setF(0.02437);
 		motor.setP(0.1705);
 		motor.setI(0);
 		motor.setD(0);
+		motor.setVoltageRampRate(8);
 		motor.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
 		motor.enableBrakeMode(false);
 	}

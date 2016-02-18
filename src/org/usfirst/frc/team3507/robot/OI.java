@@ -23,7 +23,7 @@ public class OI {
     // by subclassing Button you can create custom triggers and bind those to
     // commands the same as any other Button.
 	
-    public Joystick controller = new Joystick(RobotMap.controller);
+	public Joystick controller = new Joystick(RobotMap.controller);
     public Button A = new JoystickButton(controller, 1),
     		B = new JoystickButton(controller, 2),
     		X = new JoystickButton(controller, 3),
@@ -34,6 +34,9 @@ public class OI {
     		start = new JoystickButton(controller, 8),
     		leftStick = new JoystickButton(controller, 9),
     		rightStick = new JoystickButton(controller, 10);
+    
+    public XboxController driver = new XboxController(RobotMap.driver);
+    public XboxController operator =  new XboxController(RobotMap.operator);
     
     //// TRIGGERING COMMANDS WITH BUTTONS
     // Once you have a button, it's trivial to bind it to a button in one of
