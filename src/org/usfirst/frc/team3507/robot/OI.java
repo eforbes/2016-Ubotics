@@ -4,10 +4,8 @@ import org.usfirst.frc.team3507.robot.commands.ArmAngle;
 import org.usfirst.frc.team3507.robot.commands.FlywheelRun;
 import org.usfirst.frc.team3507.robot.commands.IntakeAhh;
 import org.usfirst.frc.team3507.robot.commands.MotorInversion;
-
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.usfirst.frc.team3507.robot.commands.SmartIntake;
+import org.usfirst.frc.team3507.robot.commands.TurnAround;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -46,11 +44,13 @@ public class OI {
     	driver.rightBump.whileHeld(new ArmAngle(false));
     	driver.leftBump.whileHeld(new ArmAngle(true));   
     	
-    	driver.A.whileHeld(new IntakeAhh(false));
-    	driver.B.whileHeld(new IntakeAhh(true));
+    	driver.rightTrigger.whileHeld(new SmartIntake());
+    	driver.leftTrigger.whileHeld(new IntakeAhh(true));
     	
     	driver.X.whileHeld(new FlywheelRun(true));
     	driver.Y.toggleWhenPressed(new MotorInversion());
+    	
+    	driver.A.whenPressed(new TurnAround());
     }
 }
 

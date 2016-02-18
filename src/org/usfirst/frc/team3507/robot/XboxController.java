@@ -16,6 +16,8 @@ public class XboxController {
 	public Button start;
 	public Button leftStick;
 	public Button rightStick;
+	public Button leftTrigger;
+	public Button rightTrigger;
 	
 	public XboxController(int controllerNumber) {
 		controller = new Joystick(controllerNumber);
@@ -29,7 +31,8 @@ public class XboxController {
 		start = new JoystickButton(controller, 8);
 		leftStick = new JoystickButton(controller, 9);
 		rightStick = new JoystickButton(controller, 10);
-		
+		leftTrigger = new AnalogButton(controller, 2);
+		rightTrigger = new AnalogButton(controller, 3);
 	}
     
 }

@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class SmartIntake extends Command {
+	
+	private int state;
 
 	Preferences prefs = Preferences.getInstance();
 	DigitalInput btn1 = new DigitalInput(0);
@@ -21,16 +23,28 @@ public class SmartIntake extends Command {
     }
 
     protected void initialize() {
+    	state = 0;
     }
 
     protected void execute() {
-    	if (Robot.oi.controller.getRawAxis(3) > 0.05) {
-    		if (!btn1.get() || !btn2.get()) {
-    			Robot.intake.go(prefs.getDouble("Intake Speed", 1));
-    		} else {
-    			end();
-    		}
-    	}
+		switch(state) {
+		case 0:
+			if (!btn1.get() || !btn2.get()) {
+				Robot.intake.go(-(prefs.getDouble("Intake Speed", 1)));		
+			} else {
+				state = 1;
+			}
+			break;
+		case 1:
+			if (btn1.get()) {
+				Robot.intake.go(prefs.getDouble("Intake Speed", 1) / 2);
+			} else {
+				state = 2;
+			}
+			break;
+		default:
+			Robot.intake.stop();
+		}
     }
 
     protected boolean isFinished() {
