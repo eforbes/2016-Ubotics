@@ -16,7 +16,8 @@ public class RobotMap {
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
 	
-	public static int controller = 0;
+	public static int driver = 0;
+	public static int operator = 1;
 	
 	public static int leftMaster = 4;
 	public static int leftSlave1 = 5;

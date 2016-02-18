@@ -22,18 +22,6 @@ public class OI {
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to
     // commands the same as any other Button.
-	
-	public Joystick controller = new Joystick(RobotMap.controller);
-    public Button A = new JoystickButton(controller, 1),
-    		B = new JoystickButton(controller, 2),
-    		X = new JoystickButton(controller, 3),
-    		Y = new JoystickButton(controller, 4),
-    		leftBump = new JoystickButton(controller, 5),
-    		rightBump = new JoystickButton(controller, 6),
-    		back = new JoystickButton(controller, 7),
-    		start = new JoystickButton(controller, 8),
-    		leftStick = new JoystickButton(controller, 9),
-    		rightStick = new JoystickButton(controller, 10);
     
     public XboxController driver = new XboxController(RobotMap.driver);
     public XboxController operator =  new XboxController(RobotMap.operator);
@@ -55,14 +43,14 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
     
     public OI() {
-    	rightBump.whileHeld(new ArmAngle(false));
-    	leftBump.whileHeld(new ArmAngle(true));   
+    	driver.rightBump.whileHeld(new ArmAngle(false));
+    	driver.leftBump.whileHeld(new ArmAngle(true));   
     	
-    	A.whileHeld(new IntakeAhh(false));
-    	B.whileHeld(new IntakeAhh(true));
+    	driver.A.whileHeld(new IntakeAhh(false));
+    	driver.B.whileHeld(new IntakeAhh(true));
     	
-    	X.whileHeld(new FlywheelRun(true));
-    	Y.toggleWhenPressed(new MotorInversion());
+    	driver.X.whileHeld(new FlywheelRun(true));
+    	driver.Y.toggleWhenPressed(new MotorInversion());
     }
 }
 
