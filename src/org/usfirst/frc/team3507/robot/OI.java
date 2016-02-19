@@ -1,11 +1,12 @@
 package org.usfirst.frc.team3507.robot;
 
 import org.usfirst.frc.team3507.robot.commands.ArmAngle;
-import org.usfirst.frc.team3507.robot.commands.FlywheelRun;
+import org.usfirst.frc.team3507.robot.commands.ChangeFlywheelState;
 import org.usfirst.frc.team3507.robot.commands.IntakeAhh;
 import org.usfirst.frc.team3507.robot.commands.MotorInversion;
 import org.usfirst.frc.team3507.robot.commands.SmartIntake;
 import org.usfirst.frc.team3507.robot.commands.TurnAround;
+import org.usfirst.frc.team3507.robot.subsystems.Flywheel;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -47,10 +48,13 @@ public class OI {
     	driver.rightTrigger.whileHeld(new SmartIntake());
     	driver.leftTrigger.whileHeld(new IntakeAhh(true));
     	
-    	driver.X.whileHeld(new FlywheelRun(true));
     	driver.Y.toggleWhenPressed(new MotorInversion());
     	
     	driver.A.whenPressed(new TurnAround());
+    	operator.A.whenPressed(new ChangeFlywheelState(Flywheel.State.AUTO));
+    	operator.B.whenPressed(new ChangeFlywheelState(Flywheel.State.SLOW));
+    	operator.X.whenPressed(new ChangeFlywheelState(Flywheel.State.FAST));
+    	operator.Y.whenPressed(new ChangeFlywheelState(Flywheel.State.OFF));
     }
 }
 
