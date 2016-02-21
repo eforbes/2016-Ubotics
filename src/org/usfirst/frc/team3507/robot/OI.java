@@ -1,7 +1,7 @@
 package org.usfirst.frc.team3507.robot;
 
-import org.usfirst.frc.team3507.robot.commands.ArmAngle;
 import org.usfirst.frc.team3507.robot.commands.ChangeFlywheelState;
+import org.usfirst.frc.team3507.robot.commands.Fire;
 import org.usfirst.frc.team3507.robot.commands.IntakeAhh;
 import org.usfirst.frc.team3507.robot.commands.MotorInversion;
 import org.usfirst.frc.team3507.robot.commands.SmartIntake;
@@ -42,19 +42,19 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
     
     public OI() {
-    	driver.rightBump.whileHeld(new ArmAngle(false));
-    	driver.leftBump.whileHeld(new ArmAngle(true));   
+    	driver.rightTrigger.whenPressed(new SmartIntake());
+    	driver.leftTrigger.whileHeld(new IntakeAhh(false));
     	
-    	driver.rightTrigger.whileHeld(new SmartIntake());
-    	driver.leftTrigger.whileHeld(new IntakeAhh(true));
-    	
-    	driver.Y.toggleWhenPressed(new MotorInversion());
+    	driver.Y.whenPressed(new MotorInversion());
     	
     	driver.A.whenPressed(new TurnAround());
     	operator.A.whenPressed(new ChangeFlywheelState(Flywheel.State.AUTO));
     	operator.B.whenPressed(new ChangeFlywheelState(Flywheel.State.SLOW));
     	operator.X.whenPressed(new ChangeFlywheelState(Flywheel.State.FAST));
     	operator.Y.whenPressed(new ChangeFlywheelState(Flywheel.State.OFF));
+    	
+    	operator.rightTrigger.whenPressed(new Fire(false));
+    	operator.rightBump.whenPressed(new Fire(true));
     }
 }
 

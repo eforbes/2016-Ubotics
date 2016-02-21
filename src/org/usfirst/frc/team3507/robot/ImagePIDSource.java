@@ -25,7 +25,7 @@ public class ImagePIDSource implements PIDSource {
 		if (x.length > 0) {
 			return x[0];
 		} else {
-			return 320;
+			return 320/2;
 		}
 	}
 }

@@ -24,9 +24,9 @@ public class IntakeAhh extends Command {
 
     protected void execute() {
     	if (!backwards) {
-    		Robot.intake.go(prefs.getDouble("Intake Speed", 0.5));
+    		Robot.intake.go(prefs.getDouble("Outtake Speed", 0.5));
     	} else {
-    		Robot.intake.go(-(prefs.getDouble("Intake Speed", 0.5)));
+    		Robot.intake.go(-(prefs.getDouble("Outtake Speed", 0.5)));
     	}
     }
 

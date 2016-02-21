@@ -19,16 +19,16 @@ public class RobotMap {
 	public static int driver = 0;
 	public static int operator = 1;
 	
-	public static int leftMaster = 4;
-	public static int leftSlave1 = 5;
-	public static int leftSlave2 = 6;
-	public static int rightMaster = 1;
-	public static int rightSlave1 = 2;
-	public static int rightSlave2 = 3;
+	public static int leftMaster = 1;
+	public static int leftSlave1 = 2;
+	public static int leftSlave2 = 3;
+	public static int rightMaster = 4;
+	public static int rightSlave1 = 5;
+	public static int rightSlave2 = 6;
 
-	public static int armMotor = 7;
+	public static int armMotor = 9;
 	public static int intakeMotor = 8;
-	public static int flywheelMotor = 9;
+	public static int flywheelMotor = 7;
 	
 	public static int gyroPort = 0;
 }

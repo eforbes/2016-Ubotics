@@ -4,7 +4,9 @@ package org.usfirst.frc.team3507.robot;
 import java.io.IOException;
 
 import org.usfirst.frc.team3507.robot.commands.AutoTarget;
-import org.usfirst.frc.team3507.robot.commands.TurnAround;
+import org.usfirst.frc.team3507.robot.commands.AutoTargetBasic;
+import org.usfirst.frc.team3507.robot.commands.DriveTrainAutoDistance;
+import org.usfirst.frc.team3507.robot.commands.ResetDriveEncoders;
 import org.usfirst.frc.team3507.robot.subsystems.Arm;
 import org.usfirst.frc.team3507.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3507.robot.subsystems.Flywheel;
@@ -38,7 +40,6 @@ public class Robot extends IterativeRobot {
 
 	public static SendableChooser accelType;
 	public static SendableChooser controlType;
-	public static SendableChooser flywheelMode;
     SendableChooser autoChoose;
     
     //CameraServer cam;
@@ -50,7 +51,7 @@ public class Robot extends IterativeRobot {
         /*cam = CameraServer.getInstance();
         cam.setQuality(50);
         cam.startAutomaticCapture("cam0");*/
-    	
+
     	// Gyro Stuff
     	ahrs = new AHRS(I2C.Port.kMXP);
     	pdp = new PowerDistributionPanel();
@@ -78,14 +79,6 @@ public class Robot extends IterativeRobot {
         controlType.addObject("Paralyzed", 4);
         SmartDashboard.putData("Robot Control Type", controlType);
         
-        // Flywheel Type Selector
-        flywheelMode = new SendableChooser();
-        flywheelMode.addDefault("Off", 0);
-        flywheelMode.addObject("Slow", 1);
-        flywheelMode.addObject("Fast", 2);
-        flywheelMode.addObject("Auto", 3);
-        SmartDashboard.putData("Flywheel Mode", flywheelMode);
-        
         // Acceleration Type Selector
         accelType = new SendableChooser();
         accelType.addDefault("Linear (Default)", 0);
@@ -95,7 +88,10 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData(Scheduler.getInstance());
         
         SmartDashboard.putData(new AutoTarget());
-        SmartDashboard.putData(new TurnAround());
+        SmartDashboard.putData(new AutoTargetBasic());
+        
+        SmartDashboard.putData(new ResetDriveEncoders());
+        SmartDashboard.putData(new DriveTrainAutoDistance(10000));
         
     	try {
             new ProcessBuilder("/home/lvuser/grip").inheritIO().start();
@@ -110,11 +106,9 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
-
     }
 	
 	public void disabledPeriodic() {
-		Scheduler.getInstance().run();
 	}
 
 	/**
@@ -144,12 +138,16 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        SmartDashboard.putNumber("Left Speed", driveTrain.speedL);
-        SmartDashboard.putNumber("Right Speed", driveTrain.speedR);
+
         SmartDashboard.putNumber("Flywheel Speed", flywheel.motor.getSpeed());
         SmartDashboard.putNumber("Angle", ahrs.getAngle());
+        SmartDashboard.putNumber("Arm pot", arm.pot.getVoltage());
+        
+        SmartDashboard.putNumber("LEFT ENCODER", driveTrain.masterLeft.getPosition());
+        SmartDashboard.putNumber("RIGHT ENCODER", driveTrain.masterRight.getPosition());
+        
         SmartDashboard.putNumber("Voltage", pdp.getVoltage());
-        //SmartDashboard.putNumber("Current", pdp.getTotalCurrent());
+        SmartDashboard.putNumber("Current", pdp.getTotalCurrent());
     }
     
     /**

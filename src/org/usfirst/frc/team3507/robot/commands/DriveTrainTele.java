@@ -33,29 +33,29 @@ public class DriveTrainTele extends Command {
     	double jAxisLeft;
     	
     	if (Robot.controlType.getSelected().equals(0)) {
-        	jAxisRight = RoboUtil.deadzone(Robot.oi.controller.getRawAxis(4), deadzone);
-        	jAxisLeft = RoboUtil.deadzone(Robot.oi.controller.getRawAxis(1), deadzone);
+        	jAxisRight = RoboUtil.deadzone(Robot.oi.driver.controller.getRawAxis(4), deadzone);
+        	jAxisLeft = RoboUtil.deadzone(Robot.oi.driver.controller.getRawAxis(1), deadzone);
         	
         	arcade(jAxisRight, jAxisLeft);
         	
         	Robot.driveTrain.go(L, R);
     	} else if (Robot.controlType.getSelected().equals(1)) {
-        	jAxisRight = RoboUtil.deadzone(Robot.oi.controller.getRawAxis(5), deadzone);
-        	jAxisLeft = RoboUtil.deadzone(Robot.oi.controller.getRawAxis(0), deadzone);
+        	jAxisRight = RoboUtil.deadzone(Robot.oi.driver.controller.getRawAxis(5), deadzone);
+        	jAxisLeft = RoboUtil.deadzone(Robot.oi.driver.controller.getRawAxis(0), deadzone);
         	
         	arcade(jAxisLeft, jAxisRight);
         	
         	Robot.driveTrain.go(L, R);
     	} else if (Robot.controlType.getSelected().equals(2)) {
-        	jAxisRight = RoboUtil.deadzone(Robot.oi.controller.getRawAxis(0), deadzone);
-        	jAxisLeft = RoboUtil.deadzone(Robot.oi.controller.getRawAxis(1), deadzone);
+        	jAxisRight = RoboUtil.deadzone(Robot.oi.driver.controller.getRawAxis(0), deadzone);
+        	jAxisLeft = RoboUtil.deadzone(Robot.oi.driver.controller.getRawAxis(1), deadzone);
         	
         	arcade(jAxisRight, jAxisLeft);
         	
         	Robot.driveTrain.go(L, R);
     	} else if (Robot.controlType.getSelected().equals(3)) {
-        	jAxisRight = Robot.oi.controller.getRawAxis(5);
-        	jAxisLeft = Robot.oi.controller.getRawAxis(1);
+        	jAxisRight = Robot.oi.driver.controller.getRawAxis(5);
+        	jAxisLeft = Robot.oi.driver.controller.getRawAxis(1);
         	Robot.driveTrain.go(-RoboUtil.deadzone(jAxisLeft, deadzone), -RoboUtil.deadzone(jAxisRight, deadzone));
     	} else if (Robot.controlType.getSelected().equals(4)) {
     		Robot.driveTrain.go(0, 0);

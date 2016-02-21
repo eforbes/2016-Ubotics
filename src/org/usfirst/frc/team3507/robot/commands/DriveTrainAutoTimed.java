@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveTrainAuto extends Command {
+public class DriveTrainAutoTimed extends Command {
 
 	private double speedRight;
 	private double speedLeft;
 	
-	public DriveTrainAuto(int ms, double spdLft, double spdRgt) {
+	public DriveTrainAutoTimed(int ms, double spdLft, double spdRgt) {
         super("DriveTrainAuto");
         requires(Robot.driveTrain);
         setTimeout(ms);

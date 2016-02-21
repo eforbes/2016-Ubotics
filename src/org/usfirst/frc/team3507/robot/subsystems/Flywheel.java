@@ -3,9 +3,9 @@ package org.usfirst.frc.team3507.robot.subsystems;
 import org.usfirst.frc.team3507.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -14,13 +14,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Flywheel extends Subsystem 
 {	
 	public CANTalon motor = new CANTalon(RobotMap.flywheelMotor);
-	Preferences prefs = Preferences.getInstance();
+
 	public State currentState;
 	public Flywheel()
 	{
-		// motor.changeControlMode(TalonControlMode.Speed);
-		motor.setF(0.02437);
-		motor.setP(0.1705);
+		motor.changeControlMode(TalonControlMode.Speed);
+		motor.setF(0.026759);
+		motor.setP(0.15); //.1705
 		motor.setI(0);
 		motor.setD(0);
 		motor.setVoltageRampRate(8);
@@ -35,6 +35,7 @@ public class Flywheel extends Subsystem
     
     public void setState(State newState)
     {
+    	Preferences prefs = Preferences.getInstance();
     	currentState = newState;
     	switch(newState) {
     		case OFF: 
@@ -55,6 +56,11 @@ public class Flywheel extends Subsystem
     public void stop()
     {
     	motor.set(0);
+    }
+    
+    public boolean isAtSpeed() {
+    	//return Math.abs(motor.getSpeed() - motor.getSetpoint()) < 100;
+    	return motor.getClosedLoopError() < 2;
     }
     
     public enum State {
