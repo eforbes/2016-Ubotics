@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3507.robot;
 
+import org.usfirst.frc.team3507.robot.commands.ArmAngle;
 import org.usfirst.frc.team3507.robot.commands.ChangeFlywheelState;
 import org.usfirst.frc.team3507.robot.commands.Fire;
 import org.usfirst.frc.team3507.robot.commands.IntakeAhh;
@@ -42,6 +43,9 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
     
     public OI() {
+    	operator.leftBump.whileHeld(new ArmAngle(false));
+    	operator.leftTrigger.whileHeld(new ArmAngle(true));
+    	
     	driver.rightTrigger.whenPressed(new SmartIntake());
     	driver.leftTrigger.whileHeld(new IntakeAhh(false));
     	

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3507.robot.commands;
 
+import org.usfirst.frc.team3507.robot.Rioduino;
 import org.usfirst.frc.team3507.robot.Robot;
 import org.usfirst.frc.team3507.robot.subsystems.Flywheel;
 
@@ -42,6 +43,7 @@ public class Fire extends Command {
     		break;
     	case 1:
     		Robot.intake.go(-1);
+    		Robot.rioduino.setLightMode(Rioduino.LIGHTS_FIRE);
     		timeFired = System.currentTimeMillis();
     		state = 2;
     		break;

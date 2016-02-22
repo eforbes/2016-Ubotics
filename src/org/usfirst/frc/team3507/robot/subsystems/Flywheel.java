@@ -63,6 +63,13 @@ public class Flywheel extends Subsystem
     	return motor.getClosedLoopError() < 2;
     }
     
+    public double getTargetPercent() {
+    	if(currentState == State.OFF) {
+    		return 0;
+    	}
+    	return Math.abs(((double) motor.getSpeed()) / ((double) motor.getSetpoint()));
+    }
+    
     public enum State {
     	OFF, SLOW, FAST, AUTO;
     }

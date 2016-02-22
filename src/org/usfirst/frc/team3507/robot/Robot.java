@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -46,6 +47,8 @@ public class Robot extends IterativeRobot {
     public static AHRS ahrs;
     public static PowerDistributionPanel pdp;
     
+    public static Rioduino rioduino;
+    
     public Robot() {
         // Camera Stuff
         /*cam = CameraServer.getInstance();
@@ -54,7 +57,10 @@ public class Robot extends IterativeRobot {
 
     	// Gyro Stuff
     	ahrs = new AHRS(I2C.Port.kMXP);
+//    	ahrs = new AHRS(SerialPort.Port.kUSB, SerialDataType.kProcessedData, (byte)9600);
     	pdp = new PowerDistributionPanel();
+    	
+    	rioduino = new Rioduino();
     }
 
     /**
@@ -98,6 +104,8 @@ public class Robot extends IterativeRobot {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    	
+    	rioduino.setLightMode(Rioduino.LIGHTS_DISABLED);
     }
 	
 	/**
@@ -106,6 +114,7 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
+    	rioduino.setLightMode(Rioduino.LIGHTS_DISABLED);
     }
 	
 	public void disabledPeriodic() {
@@ -121,6 +130,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
+    	rioduino.setLightMode(Rioduino.LIGHTS_AUTO);
     }
 
     /**
@@ -131,6 +141,10 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
+    	rioduino.setLightMode(Rioduino.LIGHTS_TELE);
+//    	if(DriverStation.getInstance().getAlliance().equals(Alliance.Red)) {
+//    		
+//    	}
     }
 
     /**
@@ -146,8 +160,24 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("LEFT ENCODER", driveTrain.masterLeft.getPosition());
         SmartDashboard.putNumber("RIGHT ENCODER", driveTrain.masterRight.getPosition());
         
+        SmartDashboard.putNumber("LEFT ENCODER VEL", driveTrain.masterLeft.getSpeed());
+        SmartDashboard.putNumber("RIGHT ENCODER VEL", driveTrain.masterRight.getSpeed());
+        
+        
         SmartDashboard.putNumber("Voltage", pdp.getVoltage());
         SmartDashboard.putNumber("Current", pdp.getTotalCurrent());
+        
+		NetworkTable table = NetworkTable.getTable("GRIP/contourReport");
+    	double[] defaultValue = new double[0];
+    	double[] x = table.getNumberArray("centerX", defaultValue);
+    	double[] y = table.getNumberArray("centerY", defaultValue);
+    	
+    	if (x.length > 0) SmartDashboard.putNumber("Target X", x[0]); else SmartDashboard.putNumber("Target X", -1000);
+    	if (y.length > 0) SmartDashboard.putNumber("Target Y", y[0]); else SmartDashboard.putNumber("Target Y", -1000);
+    	
+    	if(flywheel.currentState != Flywheel.State.OFF) {
+    		rioduino.setLightMode(Rioduino.LIGHTS_FLYWHEEL, (byte) (255 * flywheel.getTargetPercent()));
+    	}
     }
     
     /**
