@@ -5,6 +5,7 @@ import org.usfirst.frc.team3507.robot.Robot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -51,8 +52,12 @@ public class DriveTrainAutoDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.driveTrain.masterLeft.get() < tolerance 
-        		&& Robot.driveTrain.masterRight.getError() < tolerance;
+    	double leftError = Math.abs(distance - Robot.driveTrain.masterLeft.get());
+    	double rightError = Math.abs(-distance - Robot.driveTrain.masterRight.get());
+    	SmartDashboard.putNumber("Left Error", Robot.driveTrain.masterLeft.getError());
+    	SmartDashboard.putNumber("Right Error", Robot.driveTrain.masterRight.getError());
+        return leftError < tolerance 
+        		&& rightError < tolerance;
     }
 
     // Called once after isFinished returns true
