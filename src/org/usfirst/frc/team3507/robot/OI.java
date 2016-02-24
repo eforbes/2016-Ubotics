@@ -43,8 +43,8 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
     
     public OI() {
-    	operator.leftBump.whileHeld(new ArmAngle(false));
-    	operator.leftTrigger.whileHeld(new ArmAngle(true));
+//    	operator.leftBump.whileHeld(new ArmAngle(false));
+//    	operator.leftTrigger.whileHeld(new ArmAngle(true));
     	
     	driver.rightTrigger.whenPressed(new SmartIntake());
     	driver.leftTrigger.whileHeld(new IntakeAhh(false));

@@ -26,7 +26,7 @@ public class Arm extends Subsystem {
 	
     public void initDefaultCommand() {
     	//TODO: set this as default
-//    	setDefaultCommand(new ArmAnglePotentiometer());
+    	setDefaultCommand(new ArmAnglePotentiometer());
     }
     
     public void go(double speed) {
