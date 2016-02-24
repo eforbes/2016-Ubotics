@@ -23,6 +23,7 @@ public class AutoTargetBasic extends Command {
         table = NetworkTable.getTable("GRIP/contourReport");
         prefs = Preferences.getInstance();
         requires(Robot.driveTrain);
+        setTimeout(2);
     }
 
     // Called just before this Command runs the first time
@@ -73,12 +74,13 @@ public class AutoTargetBasic extends Command {
     protected boolean isFinished() {
     	double[] x = table.getNumberArray("centerX", new double[0]);
     	if (x.length > 0) {
-//    		return Math.abs(turnPID.getAvgError()) < prefs.getDouble("AutoTarget Tolerance", 10);
-    		if (turnPID.onTarget()) {
-    			SmartDashboard.putString("AutoTarget Status", "Finished on target");
-    			return true;
-    		}
-    		return false;
+    		SmartDashboard.putNumber("AUTO TARGET AVG ERR", Math.abs(turnPID.getError()));
+    		return Math.abs(turnPID.getError()) < prefs.getDouble("AutoTarget Tolerance", 10) || isTimedOut();
+//    		if (turnPID.onTarget()) {
+//    			SmartDashboard.putString("AutoTarget Status", "Finished on target");
+//    			return true;
+//    		}
+//    		return false;
     	} else {
     		SmartDashboard.putString("AutoTarget Status", "Finished no target");
     		return true;

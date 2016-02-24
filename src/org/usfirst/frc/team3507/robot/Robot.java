@@ -5,8 +5,10 @@ import java.io.IOException;
 
 import org.usfirst.frc.team3507.robot.commands.AutoTarget;
 import org.usfirst.frc.team3507.robot.commands.AutoTargetBasic;
+import org.usfirst.frc.team3507.robot.commands.AutoTest;
 import org.usfirst.frc.team3507.robot.commands.DriveTrainAutoDistance;
 import org.usfirst.frc.team3507.robot.commands.ResetDriveEncoders;
+import org.usfirst.frc.team3507.robot.commands.TurnAround;
 import org.usfirst.frc.team3507.robot.subsystems.Arm;
 import org.usfirst.frc.team3507.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3507.robot.subsystems.Flywheel;
@@ -72,8 +74,7 @@ public class Robot extends IterativeRobot {
 		
 		// Autonomous Mode Selector
         autoChoose = new SendableChooser();
-        //chooser.addDefault("Default Auto", new ExampleCommand());
-        //chooser.addObject("My Auto", new MyAutoCommand());
+        autoChoose.addDefault("Test Auto", new AutoTest());
         SmartDashboard.putData("Auto mode", autoChoose);
         
         // Drive Control Type Selector
@@ -131,6 +132,7 @@ public class Robot extends IterativeRobot {
 	 */
     public void autonomousInit() {
     	rioduino.setLightMode(Rioduino.LIGHTS_AUTO);
+    	Scheduler.getInstance().add(new AutoTest());
     }
 
     /**
@@ -138,6 +140,7 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        SmartDashboard.putNumber("Angle", ahrs.getAngle());
     }
 
     public void teleopInit() {
@@ -155,6 +158,9 @@ public class Robot extends IterativeRobot {
 
         SmartDashboard.putNumber("Flywheel Speed", flywheel.motor.getSpeed());
         SmartDashboard.putNumber("Angle", ahrs.getAngle());
+        SmartDashboard.putNumber("Yaw", ahrs.getYaw());
+        SmartDashboard.putNumber("Pitch", ahrs.getPitch());
+        SmartDashboard.putNumber("Roll", ahrs.getRoll());
         SmartDashboard.putNumber("Arm pot", arm.pot.getVoltage());
         
         SmartDashboard.putNumber("LEFT ENCODER", driveTrain.masterLeft.getPosition());

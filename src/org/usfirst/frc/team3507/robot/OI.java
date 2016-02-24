@@ -51,7 +51,7 @@ public class OI {
     	
     	driver.Y.whenPressed(new MotorInversion());
     	
-    	driver.A.whenPressed(new TurnAround());
+    	driver.A.whenPressed(new TurnAround(181));
     	operator.A.whenPressed(new ChangeFlywheelState(Flywheel.State.AUTO));
     	operator.B.whenPressed(new ChangeFlywheelState(Flywheel.State.SLOW));
     	operator.X.whenPressed(new ChangeFlywheelState(Flywheel.State.FAST));
