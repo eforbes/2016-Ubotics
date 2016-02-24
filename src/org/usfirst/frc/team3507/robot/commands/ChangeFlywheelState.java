@@ -13,6 +13,8 @@ public class ChangeFlywheelState extends Command {
 	Flywheel.State state;
 	Preferences prefs;
 	
+	boolean done = false;
+	
     public ChangeFlywheelState(Flywheel.State state) {
     	requires(Robot.flywheel);
     	requires(Robot.intake);
@@ -28,15 +30,20 @@ public class ChangeFlywheelState extends Command {
     protected void execute() {
     	if (state != Flywheel.State.OFF && !Robot.intake.btn1.get()) {
 			Robot.intake.go(prefs.getDouble("Intake Speed", 1) / 2);
+			done = false;
     	} else {
     		Robot.intake.stop();
+    		Robot.flywheel.setState(state);
+    		done = true;
     	}
-    	Robot.flywheel.setState(state);
+    	if(state == Flywheel.State.OFF) {
+        	Robot.flywheel.setState(state);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return done;
     }
 
     // Called once after isFinished returns true
