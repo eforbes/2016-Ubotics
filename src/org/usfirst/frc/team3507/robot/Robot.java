@@ -8,7 +8,6 @@ import org.usfirst.frc.team3507.robot.commands.AutoTargetBasic;
 import org.usfirst.frc.team3507.robot.commands.AutoTest;
 import org.usfirst.frc.team3507.robot.commands.DriveTrainAutoDistance;
 import org.usfirst.frc.team3507.robot.commands.ResetDriveEncoders;
-import org.usfirst.frc.team3507.robot.commands.TurnAround;
 import org.usfirst.frc.team3507.robot.subsystems.Arm;
 import org.usfirst.frc.team3507.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3507.robot.subsystems.Flywheel;
@@ -16,6 +15,8 @@ import org.usfirst.frc.team3507.robot.subsystems.Intake;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -51,6 +52,8 @@ public class Robot extends IterativeRobot {
     
     public static Rioduino rioduino;
     
+    public static DriverStation ds;
+    
     public Robot() {
         // Camera Stuff
         /*cam = CameraServer.getInstance();
@@ -63,6 +66,7 @@ public class Robot extends IterativeRobot {
     	pdp = new PowerDistributionPanel();
     	
     	rioduino = new Rioduino();
+    	ds = DriverStation.getInstance();
     }
 
     /**
@@ -131,7 +135,11 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    	rioduino.setLightMode(Rioduino.LIGHTS_AUTO);
+    	byte alliance = 0;
+    	if(ds.getAlliance() == Alliance.Blue) {
+    		alliance = 1;
+    	}
+    	rioduino.setLightMode(Rioduino.LIGHTS_AUTO, alliance);
     	Scheduler.getInstance().add(new AutoTest());
     }
 
@@ -145,9 +153,6 @@ public class Robot extends IterativeRobot {
 
     public void teleopInit() {
     	rioduino.setLightMode(Rioduino.LIGHTS_TELE);
-//    	if(DriverStation.getInstance().getAlliance().equals(Alliance.Red)) {
-//    		
-//    	}
     }
 
     /**
@@ -181,9 +186,21 @@ public class Robot extends IterativeRobot {
     	if (x.length > 0) SmartDashboard.putNumber("Target X", x[0]); else SmartDashboard.putNumber("Target X", -1000);
     	if (y.length > 0) SmartDashboard.putNumber("Target Y", y[0]); else SmartDashboard.putNumber("Target Y", -1000);
     	
-    	if(flywheel.currentState != Flywheel.State.OFF) {
-    		rioduino.setLightMode(Rioduino.LIGHTS_FLYWHEEL, (byte) (255 * flywheel.getTargetPercent()));
+    	double matchTime = ds.getMatchTime();
+    	if(matchTime < 20) {
+    		if(matchTime < 5) {
+    			rioduino.setLightMode(Rioduino.LIGHTS_LAST_5);
+    		} else {
+    			rioduino.setLightMode(Rioduino.LIGHTS_LAST_20);
+    		}
     	}
+    	
+    	
+//    	if(flywheel.currentState != Flywheel.State.OFF) {
+//    		byte lightStatus = (byte) (180 * flywheel.getTargetPercent());
+//    		rioduino.setLightMode(Rioduino.LIGHTS_FLYWHEEL, lightStatus);
+//    		SmartDashboard.putNumber("Light byte", lightStatus);
+//    	}
     }
     
     /**

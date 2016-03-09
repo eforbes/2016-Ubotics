@@ -42,7 +42,7 @@ public class Fire extends Command {
     		}
     		break;
     	case 1:
-    		Robot.intake.go(-1);
+    		Robot.intake.go(-0.75);
     		Robot.rioduino.setLightMode(Rioduino.LIGHTS_FIRE);
     		timeFired = System.currentTimeMillis();
     		state = 2;

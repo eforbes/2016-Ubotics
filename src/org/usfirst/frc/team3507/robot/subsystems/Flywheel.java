@@ -64,6 +64,8 @@ public class Flywheel extends Subsystem
     }
     
     public double getTargetPercent() {
+    	//TODO: fix this
+//    	Preferences prefs = Preferences.getInstance();
     	if(currentState == State.OFF) {
     		return 0;
     	}
