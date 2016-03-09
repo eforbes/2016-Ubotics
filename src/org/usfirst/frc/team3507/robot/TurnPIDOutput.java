@@ -7,7 +7,6 @@ public class TurnPIDOutput implements PIDOutput {
 
 	@Override
 	public void pidWrite(double output) {
-		SmartDashboard.putNumber("Turn Output", output);
 		Robot.driveTrain.go(-output, output);
 	}
 }

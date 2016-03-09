@@ -42,8 +42,8 @@ public class TurnAround extends Command {
     	turnPID.setAbsoluteTolerance(prefs.getDouble("Gyro Tolerance", 5));
     	turnPID.enable();
     	running = false;
-		SmartDashboard.putString("Turn Status", "Initialized");
-		SmartDashboard.putNumber("turn Setpoint", setpoint);
+//		SmartDashboard.putString("Turn Status", "Initialized");
+//		SmartDashboard.putNumber("turn Setpoint", setpoint);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -55,14 +55,14 @@ public class TurnAround extends Command {
         	turnPID.setSetpoint(setpoint);
         	running = true;
     	}
-    	SmartDashboard.putNumber("turn Setpoint", setpoint);
-		SmartDashboard.putString("Turn Status", "Running");
+//    	SmartDashboard.putNumber("turn Setpoint", setpoint);
+//		SmartDashboard.putString("Turn Status", "Running");
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	double gyroDif = Math.abs(Robot.ahrs.getAngle() - setpoint);
-    	SmartDashboard.putNumber("Gyro Dif", gyroDif);
+//    	SmartDashboard.putNumber("Gyro Dif", gyroDif);
     	if (count == maxArraySize) {
     		sum -= difs[index];
     		count--;
@@ -71,13 +71,13 @@ public class TurnAround extends Command {
     	sum += gyroDif;
     	count++;
     	double avgDif = sum / count;
-    	SmartDashboard.putNumber("Average Diff", avgDif);
+//    	SmartDashboard.putNumber("Average Diff", avgDif);
     	index++;
     	if (index >= maxArraySize) {
     		index = 0;
     	}
 		if(avgDif < prefs.getDouble("Gyro Tolerance", 10)) {
-			SmartDashboard.putString("Turn Status", "Finished");
+//			SmartDashboard.putString("Turn Status", "Finished");
 			return true;        	
 		} else {
 			return false;
@@ -94,7 +94,7 @@ public class TurnAround extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-		SmartDashboard.putString("Turn Status", "Interupted");
+//		SmartDashboard.putString("Turn Status", "Interupted");
     	end();
     }
 }

@@ -4,7 +4,6 @@ import org.usfirst.frc.team3507.robot.Robot;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -23,8 +22,8 @@ public class SmartIntake extends Command {
 
     protected void execute() {
     	Preferences prefs = Preferences.getInstance();
-    	SmartDashboard.putBoolean("ramp limit top", Robot.intake.btn1.get());
-    	SmartDashboard.putBoolean("ramp limit bot", Robot.intake.btn2.get());
+//    	SmartDashboard.putBoolean("ramp limit top", Robot.intake.btn1.get());
+//    	SmartDashboard.putBoolean("ramp limit bot", Robot.intake.btn2.get());
 		switch(state) {
 		case 0:
 			if (Robot.intake.btn1.get() || Robot.intake.btn2.get()) {

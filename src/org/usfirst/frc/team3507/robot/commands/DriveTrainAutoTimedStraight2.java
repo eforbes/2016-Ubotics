@@ -54,7 +54,7 @@ public class DriveTrainAutoTimedStraight2 extends Command {
     		flat--;
     		if(flat<0) flat=0;
     	}
-    	SmartDashboard.putNumber("Flatness", flat);
+//    	SmartDashboard.putNumber("Flatness", flat);
         return flat > 3;
     }
 

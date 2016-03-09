@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3507.robot;
 
-import org.usfirst.frc.team3507.robot.commands.ArmAngle;
+import org.usfirst.frc.team3507.robot.commands.AutoTargetBasic;
 import org.usfirst.frc.team3507.robot.commands.ChangeFlywheelState;
 import org.usfirst.frc.team3507.robot.commands.Fire;
 import org.usfirst.frc.team3507.robot.commands.IntakeAhh;
@@ -52,6 +52,9 @@ public class OI {
     	driver.Y.whenPressed(new MotorInversion());
     	
     	driver.A.whenPressed(new TurnAround(181));
+    	
+    	driver.rightStick.whileHeld(new AutoTargetBasic());
+    	
     	operator.A.whenPressed(new ChangeFlywheelState(Flywheel.State.AUTO));
     	operator.B.whenPressed(new ChangeFlywheelState(Flywheel.State.SLOW));
     	operator.X.whenPressed(new ChangeFlywheelState(Flywheel.State.FAST));

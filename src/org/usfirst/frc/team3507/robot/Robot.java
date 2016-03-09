@@ -3,11 +3,8 @@ package org.usfirst.frc.team3507.robot;
 
 import java.io.IOException;
 
-import org.usfirst.frc.team3507.robot.commands.AutoTarget;
 import org.usfirst.frc.team3507.robot.commands.AutoTargetBasic;
 import org.usfirst.frc.team3507.robot.commands.AutoTest;
-import org.usfirst.frc.team3507.robot.commands.DriveTrainAutoDistance;
-import org.usfirst.frc.team3507.robot.commands.ResetDriveEncoders;
 import org.usfirst.frc.team3507.robot.subsystems.Arm;
 import org.usfirst.frc.team3507.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3507.robot.subsystems.Flywheel;
@@ -46,7 +43,6 @@ public class Robot extends IterativeRobot {
 	public static SendableChooser controlType;
     SendableChooser autoChoose;
     
-    //CameraServer cam;
     public static AHRS ahrs;
     public static PowerDistributionPanel pdp;
     
@@ -55,14 +51,8 @@ public class Robot extends IterativeRobot {
     public static DriverStation ds;
     
     public Robot() {
-        // Camera Stuff
-        /*cam = CameraServer.getInstance();
-        cam.setQuality(50);
-        cam.startAutomaticCapture("cam0");*/
-
     	// Gyro Stuff
     	ahrs = new AHRS(I2C.Port.kMXP);
-//    	ahrs = new AHRS(SerialPort.Port.kUSB, SerialDataType.kProcessedData, (byte)9600);
     	pdp = new PowerDistributionPanel();
     	
     	rioduino = new Rioduino();
@@ -98,11 +88,7 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putData(Scheduler.getInstance());
         
-        SmartDashboard.putData(new AutoTarget());
         SmartDashboard.putData(new AutoTargetBasic());
-        
-        SmartDashboard.putData(new ResetDriveEncoders());
-        SmartDashboard.putData(new DriveTrainAutoDistance(10000));
         
     	try {
             new ProcessBuilder("/home/lvuser/grip").inheritIO().start();
@@ -163,20 +149,7 @@ public class Robot extends IterativeRobot {
 
         SmartDashboard.putNumber("Flywheel Speed", flywheel.motor.getSpeed());
         SmartDashboard.putNumber("Angle", ahrs.getAngle());
-        SmartDashboard.putNumber("Yaw", ahrs.getYaw());
-        SmartDashboard.putNumber("Pitch", ahrs.getPitch());
-        SmartDashboard.putNumber("Roll", ahrs.getRoll());
         SmartDashboard.putNumber("Arm pot", arm.pot.getVoltage());
-        
-        SmartDashboard.putNumber("LEFT ENCODER", driveTrain.masterLeft.getPosition());
-        SmartDashboard.putNumber("RIGHT ENCODER", driveTrain.masterRight.getPosition());
-        
-        SmartDashboard.putNumber("LEFT ENCODER VEL", driveTrain.masterLeft.getSpeed());
-        SmartDashboard.putNumber("RIGHT ENCODER VEL", driveTrain.masterRight.getSpeed());
-        
-        
-        SmartDashboard.putNumber("Voltage", pdp.getVoltage());
-        SmartDashboard.putNumber("Current", pdp.getTotalCurrent());
         
 		NetworkTable table = NetworkTable.getTable("GRIP/contourReport");
     	double[] defaultValue = new double[0];

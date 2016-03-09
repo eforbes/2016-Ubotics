@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -25,13 +24,12 @@ public class Arm extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
-    	//TODO: set this as default
     	setDefaultCommand(new ArmAnglePotentiometer());
     }
     
     public void go(double speed) {
-    	SmartDashboard.putBoolean("arm limit up", limitUp.get());
-    	SmartDashboard.putBoolean("arm limit down", limitDown.get());
+//    	SmartDashboard.putBoolean("arm limit up", limitUp.get());
+//    	SmartDashboard.putBoolean("arm limit down", limitDown.get());
     	if(speed > 0 && limitUp.get()) {
     		stop();
     		return;

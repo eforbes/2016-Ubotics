@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -31,7 +30,7 @@ public class AutoTarget extends Command {
     	count = 0;
     	double[] x = table.getNumberArray("centerX", new double[0]);
     	double deltaAngle = (x[0] - prefs.getDouble("Turn Setpoint", 160)) * prefs.getDouble("K", 0);
-    	SmartDashboard.putNumber("Delta Angle", deltaAngle);
+//    	SmartDashboard.putNumber("Delta Angle", deltaAngle);
     	turnPID = new PIDController(
     			prefs.getDouble("Turn P", 0), 
     			prefs.getDouble("Turn I", 0), 
@@ -42,7 +41,7 @@ public class AutoTarget extends Command {
     	turnPID.setInputRange(0, 360);
     	turnPID.setOutputRange(-0.5, 0.5);
     	turnPID.setSetpoint(fix(Robot.ahrs.getAngle() + deltaAngle));
-    	SmartDashboard.putNumber("Setpoint", fix(Robot.ahrs.getAngle() + deltaAngle));
+//    	SmartDashboard.putNumber("Setpoint", fix(Robot.ahrs.getAngle() + deltaAngle));
     	turnPID.setAbsoluteTolerance(prefs.getDouble("Gyro Tolerance", 5));
     	turnPID.enable();
     }
@@ -55,21 +54,21 @@ public class AutoTarget extends Command {
     	double deltaAngle;
     	
     	if(Math.abs(Robot.ahrs.getAngle() - turnPID.getSetpoint()) < prefs.getDouble("Gyro Tolerance", 1)) {
-    		SmartDashboard.putNumber("Recalcs", ++count);
+//    		SmartDashboard.putNumber("Recalcs", ++count);
         	if (x.length > 0) {
         		deltaAngle = (x[0] - prefs.getDouble("Turn Setpoint", 160)) * prefs.getDouble("K", 0);
         	} else {
         		deltaAngle = 0;
         	}
-        	SmartDashboard.putNumber("Setpoint", fix(Robot.ahrs.getAngle() + deltaAngle));
+//        	SmartDashboard.putNumber("Setpoint", fix(Robot.ahrs.getAngle() + deltaAngle));
     		turnPID.setSetpoint(fix(Robot.ahrs.getAngle() + deltaAngle));
-    		SmartDashboard.putNumber("Delta Angle", deltaAngle);
+//    		SmartDashboard.putNumber("Delta Angle", deltaAngle);
     	}
     	
-    	if (x.length > 0) SmartDashboard.putNumber("Target X", x[0]);
-    	if (y.length > 0) SmartDashboard.putNumber("Target Y", y[0]);
+//    	if (x.length > 0) SmartDashboard.putNumber("Target X", x[0]);
+//    	if (y.length > 0) SmartDashboard.putNumber("Target Y", y[0]);
     	
-    	SmartDashboard.putNumber("Turn PID Status", turnPID.getAvgError());
+//    	SmartDashboard.putNumber("Turn PID Status", turnPID.getAvgError());
     }
 
     // Make this return true when this Command no longer needs to run execute()

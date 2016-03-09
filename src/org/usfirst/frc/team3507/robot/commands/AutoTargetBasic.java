@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -41,7 +40,7 @@ public class AutoTargetBasic extends Command {
 //    	turnPID.setToleranceBuffer(10);
     	turnPID.disable();
     	
-    	SmartDashboard.putString("AutoTarget Status", "Initialized");
+//    	SmartDashboard.putString("AutoTarget Status", "Initialized");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -52,7 +51,7 @@ public class AutoTargetBasic extends Command {
 
     	double setpoint = prefs.getDouble("Turn Setpoint", 160);
 
-    	SmartDashboard.putNumber("Setpoint", setpoint);
+//    	SmartDashboard.putNumber("Setpoint", setpoint);
 		turnPID.setSetpoint(setpoint);
     	
 		turnPID.setPID(
@@ -62,19 +61,19 @@ public class AutoTargetBasic extends Command {
 		
 		turnPID.enable();
 		
-    	if (x.length > 0) SmartDashboard.putNumber("Target X", x[0]);
-    	if (y.length > 0) SmartDashboard.putNumber("Target Y", y[0]);
-    	
-    	SmartDashboard.putNumber("AutoTarget Average Error", turnPID.getAvgError());
-    	SmartDashboard.putNumber("AutoTarget PID Error", turnPID.getError());
-    	SmartDashboard.putString("AutoTarget Status", "Running");
+//    	if (x.length > 0) SmartDashboard.putNumber("Target X", x[0]);
+//    	if (y.length > 0) SmartDashboard.putNumber("Target Y", y[0]);
+//    	
+//    	SmartDashboard.putNumber("AutoTarget Average Error", turnPID.getAvgError());
+//    	SmartDashboard.putNumber("AutoTarget PID Error", turnPID.getError());
+//    	SmartDashboard.putString("AutoTarget Status", "Running");
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	double[] x = table.getNumberArray("centerX", new double[0]);
     	if (x.length > 0) {
-    		SmartDashboard.putNumber("AUTO TARGET AVG ERR", Math.abs(turnPID.getError()));
+//    		SmartDashboard.putNumber("AUTO TARGET AVG ERR", Math.abs(turnPID.getError()));
     		return Math.abs(turnPID.getError()) < prefs.getDouble("AutoTarget Tolerance", 10) || isTimedOut();
 //    		if (turnPID.onTarget()) {
 //    			SmartDashboard.putString("AutoTarget Status", "Finished on target");
@@ -82,7 +81,7 @@ public class AutoTargetBasic extends Command {
 //    		}
 //    		return false;
     	} else {
-    		SmartDashboard.putString("AutoTarget Status", "Finished no target");
+//    		SmartDashboard.putString("AutoTarget Status", "Finished no target");
     		return true;
     	}
     }
@@ -96,7 +95,7 @@ public class AutoTargetBasic extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	SmartDashboard.putString("AutoTarget Status", "Interrupted");
+//    	SmartDashboard.putString("AutoTarget Status", "Interrupted");
     	end();
     }
 }
