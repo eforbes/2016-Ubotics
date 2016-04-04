@@ -100,11 +100,11 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putData(new AutoTargetBasic(5));
         
-    	try {
-            new ProcessBuilder("/home/lvuser/grip").inheritIO().start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//    	try {
+//            new ProcessBuilder("/home/lvuser/grip").inheritIO().start();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     	
     	rioduino.setLightMode(Rioduino.LIGHTS_DISABLED);
     }
