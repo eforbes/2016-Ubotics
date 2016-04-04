@@ -14,10 +14,10 @@ public class DriveTrainAutoTimedStraight extends Command {
 	private double startAngle;
 	private double tolerance = 3;
 	
-	public DriveTrainAutoTimedStraight(double ms, double spdLft, double spdRgt) {
+	public DriveTrainAutoTimedStraight(double sec, double spdLft, double spdRgt) {
         super("DriveTrainAuto");
         requires(Robot.driveTrain);
-        setTimeout(ms);
+        setTimeout(sec);
         speedRight = spdRgt;
         speedLeft = spdLft;
     }

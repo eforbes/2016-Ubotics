@@ -1,29 +1,19 @@
 package org.usfirst.frc.team3507.robot.commands;
 
-import org.usfirst.frc.team3507.robot.subsystems.Flywheel;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class AutoTest extends CommandGroup {
+public class AutoNone extends CommandGroup {
     
-    public  AutoTest(double angle) {
+    public  AutoNone() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-    	
-//    	addSequential(new DriveTrainAutoTimedStraight2(0.5, 0.5, 3));
-//    	addSequential(new DriveTrainAutoTimedStraight(0.75, 0.5, 0.5));
-    	addSequential(new DriveTrainAutoTimedStraight(2.5, 0.5, 0.5));
-    	addSequential(new TurnAround(angle, 2));
-    	addSequential(new DriveTrainAutoTimedStraight(0.75, -0.5, -0.5));
-    	addSequential(new AutoTargetBasic(4));
-    	addSequential(new ChangeFlywheelState(Flywheel.State.AUTO));
-    	addSequential(new Delay(2));
-    	addSequential(new Fire(false));
+
+    	//NOOP
 
         // To run multiple commands at the same time,
         // use addParallel()

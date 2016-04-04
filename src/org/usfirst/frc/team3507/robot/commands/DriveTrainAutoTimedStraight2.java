@@ -17,11 +17,12 @@ public class DriveTrainAutoTimedStraight2 extends Command {
 	private boolean flag = false;
 	private int flat = 0;
 	
-	public DriveTrainAutoTimedStraight2(double spdLft, double spdRgt) {
+	public DriveTrainAutoTimedStraight2(double spdLft, double spdRgt, double sec) {
         super("DriveTrainAuto");
         requires(Robot.driveTrain);
         speedRight = spdRgt;
         speedLeft = spdLft;
+        setTimeout(sec);
     }
 
     // Called just before this Command runs the first time
@@ -54,8 +55,8 @@ public class DriveTrainAutoTimedStraight2 extends Command {
     		flat--;
     		if(flat<0) flat=0;
     	}
-//    	SmartDashboard.putNumber("Flatness", flat);
-        return flat > 3;
+    	SmartDashboard.putNumber("Flatness", flat);
+        return flat > 3 || isTimedOut();
     }
 
     // Called once after isFinished returns true

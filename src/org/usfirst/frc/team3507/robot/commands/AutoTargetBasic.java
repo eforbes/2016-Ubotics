@@ -18,11 +18,11 @@ public class AutoTargetBasic extends Command {
     PIDController turnPID;
     Preferences prefs;
 	
-    public AutoTargetBasic() {
+    public AutoTargetBasic(double sec) {
         table = NetworkTable.getTable("GRIP/contourReport");
         prefs = Preferences.getInstance();
         requires(Robot.driveTrain);
-        setTimeout(2);
+        setTimeout(sec);
     }
 
     // Called just before this Command runs the first time
@@ -71,6 +71,9 @@ public class AutoTargetBasic extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	if(isTimedOut()) {
+    		return true;
+    	}
     	double[] x = table.getNumberArray("centerX", new double[0]);
     	if (x.length > 0) {
 //    		SmartDashboard.putNumber("AUTO TARGET AVG ERR", Math.abs(turnPID.getError()));

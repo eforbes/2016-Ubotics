@@ -6,7 +6,6 @@ import org.usfirst.frc.team3507.robot.TurnPIDOutput;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -24,9 +23,10 @@ public class TurnAround extends Command {
 	private double[] difs = new double[maxArraySize];
 	private double deltaAngle;
 	
-    public TurnAround(double deltaAngle) {
+    public TurnAround(double deltaAngle, double sec) {
     	requires(Robot.driveTrain);
     	this.deltaAngle = deltaAngle;
+    	setTimeout(sec);
     }
 
     // Called just before this Command runs the first time
@@ -61,6 +61,9 @@ public class TurnAround extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	if(isTimedOut()) {
+    		return true;
+    	}
     	double gyroDif = Math.abs(Robot.ahrs.getAngle() - setpoint);
 //    	SmartDashboard.putNumber("Gyro Dif", gyroDif);
     	if (count == maxArraySize) {

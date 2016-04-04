@@ -49,11 +49,13 @@ public class OI {
     	driver.rightTrigger.whenPressed(new SmartIntake());
     	driver.leftTrigger.whileHeld(new IntakeAhh(false));
     	
+    	driver.leftBump.whileHeld(new IntakeAhh(false, 0.1));
+    	
     	driver.Y.whenPressed(new MotorInversion());
     	
-    	driver.A.whenPressed(new TurnAround(181));
+    	driver.A.whenPressed(new TurnAround(181, 4));
     	
-    	driver.rightStick.whileHeld(new AutoTargetBasic());
+    	driver.rightStick.whenPressed(new AutoTargetBasic(5));
     	
     	operator.A.whenPressed(new ChangeFlywheelState(Flywheel.State.AUTO));
     	operator.B.whenPressed(new ChangeFlywheelState(Flywheel.State.SLOW));

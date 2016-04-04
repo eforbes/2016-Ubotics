@@ -3,8 +3,11 @@ package org.usfirst.frc.team3507.robot;
 
 import java.io.IOException;
 
+import org.usfirst.frc.team3507.robot.commands.AutoNone;
+import org.usfirst.frc.team3507.robot.commands.AutoShoot;
 import org.usfirst.frc.team3507.robot.commands.AutoTargetBasic;
 import org.usfirst.frc.team3507.robot.commands.AutoTest;
+import org.usfirst.frc.team3507.robot.commands.DriveTrainAutoTimedStraight;
 import org.usfirst.frc.team3507.robot.subsystems.Arm;
 import org.usfirst.frc.team3507.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3507.robot.subsystems.Flywheel;
@@ -17,6 +20,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
@@ -68,7 +72,13 @@ public class Robot extends IterativeRobot {
 		
 		// Autonomous Mode Selector
         autoChoose = new SendableChooser();
-        autoChoose.addDefault("Test Auto", new AutoTest());
+        autoChoose.addObject("Cross and Shoot 2", new AutoTest(160));
+        autoChoose.addObject("Cross and Shoot 3", new AutoTest(220));
+        autoChoose.addObject("Cross and Shoot 4", new AutoTest(181));
+        autoChoose.addObject("Cross and Shoot 5", new AutoTest(-160));
+        autoChoose.addDefault("Drive only (default)", new DriveTrainAutoTimedStraight(4, 0.5, 0.5));
+        autoChoose.addObject("Shoot only", new AutoShoot(Flywheel.State.FAST));
+        autoChoose.addObject("Auto Disabled", new AutoNone());
         SmartDashboard.putData("Auto mode", autoChoose);
         
         // Drive Control Type Selector
@@ -88,7 +98,7 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putData(Scheduler.getInstance());
         
-        SmartDashboard.putData(new AutoTargetBasic());
+        SmartDashboard.putData(new AutoTargetBasic(5));
         
     	try {
             new ProcessBuilder("/home/lvuser/grip").inheritIO().start();
@@ -126,7 +136,8 @@ public class Robot extends IterativeRobot {
     		alliance = 1;
     	}
     	rioduino.setLightMode(Rioduino.LIGHTS_AUTO, alliance);
-    	Scheduler.getInstance().add(new AutoTest());
+    	Command autoCommand = (Command) autoChoose.getSelected();
+    	autoCommand.start();
     }
 
     /**
@@ -149,7 +160,11 @@ public class Robot extends IterativeRobot {
 
         SmartDashboard.putNumber("Flywheel Speed", flywheel.motor.getSpeed());
         SmartDashboard.putNumber("Angle", ahrs.getAngle());
+        SmartDashboard.putNumber("Pitch", ahrs.getPitch());
         SmartDashboard.putNumber("Arm pot", arm.pot.getVoltage());
+        
+        SmartDashboard.putBoolean("Ramp limit 1", intake.btn1.get());
+        SmartDashboard.putBoolean("Ramp limit 2", intake.btn2.get());
         
 		NetworkTable table = NetworkTable.getTable("GRIP/contourReport");
     	double[] defaultValue = new double[0];

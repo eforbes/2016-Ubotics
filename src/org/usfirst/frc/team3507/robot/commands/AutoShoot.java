@@ -7,23 +7,17 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoTest extends CommandGroup {
+public class AutoShoot extends CommandGroup {
     
-    public  AutoTest(double angle) {
+    public  AutoShoot(Flywheel.State state) {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
     	
-//    	addSequential(new DriveTrainAutoTimedStraight2(0.5, 0.5, 3));
-//    	addSequential(new DriveTrainAutoTimedStraight(0.75, 0.5, 0.5));
-    	addSequential(new DriveTrainAutoTimedStraight(2.5, 0.5, 0.5));
-    	addSequential(new TurnAround(angle, 2));
-    	addSequential(new DriveTrainAutoTimedStraight(0.75, -0.5, -0.5));
-    	addSequential(new AutoTargetBasic(4));
-    	addSequential(new ChangeFlywheelState(Flywheel.State.AUTO));
-    	addSequential(new Delay(2));
-    	addSequential(new Fire(false));
+    	addSequential(new ChangeFlywheelState(state));
+    	addSequential(new Delay(8));
+    	addSequential(new Fire(true));
 
         // To run multiple commands at the same time,
         // use addParallel()

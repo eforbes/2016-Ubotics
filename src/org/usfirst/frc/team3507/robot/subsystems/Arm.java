@@ -14,10 +14,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Arm extends Subsystem {
 
 	public CANTalon motor = new CANTalon(RobotMap.armMotor);
-	DigitalInput limitUp = new DigitalInput(2);
-	DigitalInput limitDown = new DigitalInput(3);
+	public DigitalInput limitUp = new DigitalInput(2);
+	public DigitalInput limitDown = new DigitalInput(3);
 	
-	public AnalogInput pot = new AnalogInput(1);
+	public AnalogInput pot = new AnalogInput(3);
 	
 	public Arm() {
 		motor.enableBrakeMode(true);
@@ -30,16 +30,20 @@ public class Arm extends Subsystem {
     public void go(double speed) {
 //    	SmartDashboard.putBoolean("arm limit up", limitUp.get());
 //    	SmartDashboard.putBoolean("arm limit down", limitDown.get());
-    	if(speed > 0 && limitUp.get()) {
-    		stop();
-    		return;
-    	}
+//    	if(speed > 0 && !limitUp.get()) {
+//    		stop();
+//    		return;
+//    	}
     	//TODO: when second limit switch is added to the arm
 //    	if(speed < 0 && limitDown.get()) {
 //    		stop();
 //    		return;
 //    	}
-    	motor.set(speed);
+    	if(speed<0) {
+    		motor.set(-speed/3.0);//DOWN
+    	} else {
+    		motor.set(-speed/2.0);//UP
+    	}
     }
     
     public void stop() {
